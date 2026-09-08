@@ -10,6 +10,7 @@ const downloadSongButton = document.querySelector("#download-song");
 const copyHashtagsButton = document.querySelector("#copy-hashtags");
 const backToFormButton = document.querySelector("#back-to-form");
 const copyStatus = document.querySelector("#copy-status");
+const validationMessage = document.querySelector("#validation-message");
 const blockedWords = [
   "puto",
   "puta",
@@ -246,11 +247,18 @@ day1Form.addEventListener("submit", function (event) {
   const combinedText = `${songTitle} ${artistName} ${message}`;
 
   if (containsBlockedWord(combinedText)) {
-    alert(
-      "Please use respectful language. Profanity or harmful content is not allowed."
-    );
-    return;
-  }
+  validationMessage.innerHTML = `
+    <strong>Please edit your dedication.</strong>
+    Profanity, insults, sexual content or messages that could harm
+    HAN’s image are not allowed. Please use respectful language.
+  `;
+
+  validationMessage.hidden = false;
+  return;
+}
+
+validationMessage.hidden = true;
+validationMessage.textContent = "";
 
   drawSongCard();
 
