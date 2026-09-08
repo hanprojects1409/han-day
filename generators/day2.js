@@ -32,17 +32,21 @@ function drawWishCard(wishMessage, wishDesign) {
 
   const ctx = wishCanvasContext;
 
-  if (wishDesign === "classic") {
-  ctx.fillStyle = "#fff9d9";
-} else if (wishDesign === "shining") {
-  ctx.fillStyle = "#f8e99b";
-} else {
-  ctx.fillStyle = "#111111";
-  }
+  const isShooting = wishDesign === "shooting";
+  const isShining = wishDesign === "shining";
 
+  const backgroundColor = isShooting
+    ? "#fff9d9"
+    : isShining
+      ? "#f8e99b"
+      : "#fffdf2";
+
+  const textColor = "#111111";
+
+  ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, wishCanvas.width, wishCanvas.height);
 
-  ctx.fillStyle = wishDesign === "shooting" ? "#ffffff" : "#111111";
+  ctx.fillStyle = textColor;
   ctx.textAlign = "left";
 
   ctx.font = "500 42px Inter, sans-serif";
@@ -52,24 +56,99 @@ function drawWishCard(wishMessage, wishDesign) {
   ctx.fillText("MAKE A", 90, 280);
   ctx.fillText("WISH FOR HAN", 90, 380);
 
-  ctx.textAlign = "center";
+  if (isShooting) {
+    drawShootingStar(ctx);
+  } else {
+    drawWishStar(ctx, isShining);
+    drawTextInsideStar(ctx, wishMessage);
+  }
 
-  ctx.font = "100px serif";
-  ctx.fillText("★", 600, 650);
+  if (isShooting) {
+    drawTextBelowStar(ctx, wishMessage);
+  }
 
-  ctx.font = "400 42px Inter, sans-serif";
-  ctx.fillText("My wish for HAN", 600, 820);
+  ctx.textAlign = "left";
+  ctx.font = "400 26px Inter, sans-serif";
+  ctx.fillText("#HAN_DAY  #HappyHANDay", 90, 1410);
+}
 
-  ctx.font = "400 38px Inter, sans-serif";
+function drawWishStar(ctx, isShining) {
+  const centerX = 600;
+  const centerY = 780;
+  const outerRadius = 300;
+  const innerRadius = 135;
+  const points = 5;
 
+  ctx.save();
+
+  ctx.beginPath();
+
+  for (let i = 0; i < points * 2; i++) {
+    const angle = -Math.PI / 2 + (i * Math.PI) / points;
+    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+
+  ctx.closePath();
+
+  ctx.fillStyle = isShining ? "#f2d84b" : "#f8e99b";
+  ctx.fill();
+
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#111111";
+  ctx.stroke();
+
+  if (isShining) {
+    drawSparkle(ctx, 300, 560, 34);
+    drawSparkle(ctx, 900, 580, 28);
+    drawSparkle(ctx, 300, 980, 24);
+    drawSparkle(ctx, 900, 970, 34);
+  }
+
+  ctx.restore();
+}
+
+function drawSparkle(ctx, x, y, size) {
+  ctx.save();
+
+  ctx.translate(x, y);
+  ctx.beginPath();
+
+  ctx.moveTo(0, -size);
+  ctx.lineTo(size * 0.25, -size * 0.25);
+  ctx.lineTo(size, 0);
+  ctx.lineTo(size * 0.25, size * 0.25);
+  ctx.lineTo(0, size);
+  ctx.lineTo(-size * 0.25, size * 0.25);
+  ctx.lineTo(-size, 0);
+  ctx.lineTo(-size * 0.25, -size * 0.25);
+  ctx.closePath();
+
+  ctx.fillStyle = "#111111";
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawTextInsideStar(ctx, wishMessage) {
   const words = wishMessage.split(" ");
   const lines = [];
   let currentLine = "";
 
+  ctx.font = "400 34px Inter, sans-serif";
+
   words.forEach(function (word) {
     const testLine = `${currentLine} ${word}`.trim();
 
-    if (ctx.measureText(testLine).width > 900) {
+    if (ctx.measureText(testLine).width > 360) {
       lines.push(currentLine);
       currentLine = word;
     } else {
@@ -81,16 +160,106 @@ function drawWishCard(wishMessage, wishDesign) {
     lines.push(currentLine);
   }
 
+  ctx.fillStyle = "#111111";
+  ctx.textAlign = "center";
+
   lines.forEach(function (line, index) {
-    ctx.fillText(line, 600, 950 + index * 58);
+    ctx.fillText(line, 600, 750 + index * 48);
   });
 
-  ctx.font = "400 28px Inter, sans-serif";
-  ctx.fillText("A wish sent with love", 600, 1320);
+  ctx.textAlign = "left";
+}
+
+function drawShootingStar(ctx) {
+  const centerX = 600;
+  const centerY = 760;
+
+  ctx.save();
+
+  ctx.strokeStyle = "#111111";
+  ctx.lineWidth = 34;
+  ctx.lineCap = "round";
+
+  ctx.beginPath();
+  ctx.moveTo(260, 930);
+  ctx.lineTo(520, 700);
+  ctx.stroke();
+
+  ctx.lineWidth = 18;
+
+  ctx.beginPath();
+  ctx.moveTo(180, 1010);
+  ctx.lineTo(500, 700);
+  ctx.stroke();
+
+  drawStarShape(ctx, centerX, centerY, 230, 105);
+
+  ctx.restore();
+}
+
+function drawStarShape(ctx, centerX, centerY, outerRadius, innerRadius) {
+  const points = 5;
+
+  ctx.save();
+
+  ctx.beginPath();
+
+  for (let i = 0; i < points * 2; i++) {
+    const angle = -Math.PI / 2 + (i * Math.PI) / points;
+    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+
+  ctx.closePath();
+
+  ctx.fillStyle = "#f8e99b";
+  ctx.fill();
+
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#111111";
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawTextBelowStar(ctx, wishMessage) {
+  const words = wishMessage.split(" ");
+  const lines = [];
+  let currentLine = "";
+
+  ctx.font = "400 38px Inter, sans-serif";
+
+  words.forEach(function (word) {
+    const testLine = `${currentLine} ${word}`.trim();
+
+    if (ctx.measureText(testLine).width > 850) {
+      lines.push(currentLine);
+      currentLine = word;
+    } else {
+      currentLine = testLine;
+    }
+  });
+
+  if (currentLine) {
+    lines.push(currentLine);
+  }
+
+  ctx.fillStyle = "#111111";
+  ctx.textAlign = "center";
+
+  lines.forEach(function (line, index) {
+    ctx.fillText(line, 600, 1100 + index * 58);
+  });
 
   ctx.textAlign = "left";
-  ctx.font = "400 26px Inter, sans-serif";
-  ctx.fillText("#HAN_DAY  #HappyHANDay", 90, 1410);
 }
 
 day2Form.addEventListener("submit", function (event) {
