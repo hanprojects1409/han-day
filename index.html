@@ -242,6 +242,34 @@
       text-transform: uppercase;
     }
 
+    .field-hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--gray);
+  font-size: 11px;
+}
+
+.content-warning {
+  margin-bottom: 25px;
+  border-left: 3px solid var(--black);
+  background: var(--yellow-light);
+  padding: 16px 18px;
+}
+
+.content-warning strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.content-warning p {
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
     [hidden] {
       display: none !important;
     }
@@ -303,34 +331,40 @@
       <section class="panel" id="form-section">
         <form id="day1-form">
 
-          <div class="field">
-            <label for="song-title">Song title</label>
-            <input
-              id="song-title"
-              type="text"
-              placeholder="Enter the song title"
-              required
-            >
-          </div>
+      <div class="field">
+  <label for="song-title">Song title</label>
+  <input
+    id="song-title"
+    type="text"
+    maxlength="60"
+    placeholder="Enter the song title"
+    required
+  >
+  <small class="field-hint">Maximum 60 characters.</small>
+</div>
 
-          <div class="field">
-            <label for="artist-name">Artist</label>
-            <input
-              id="artist-name"
-              type="text"
-              placeholder="Enter the artist name"
-              required
-            >
-          </div>
+<div class="field">
+  <label for="artist-name">Artist</label>
+  <input
+    id="artist-name"
+    type="text"
+    maxlength="45"
+    placeholder="Enter the artist name"
+    required
+  >
+  <small class="field-hint">Maximum 45 characters.</small>
+</div>
 
-          <div class="field">
-            <label for="song-message">Message for HAN · Optional</label>
-            <textarea
-              id="song-message"
-              maxlength="180"
-              placeholder="Write a short birthday message..."
-            ></textarea>
-          </div>
+<div class="field">
+  <label for="song-message">Message for HAN · Optional</label>
+  <textarea
+    id="song-message"
+    maxlength="180"
+    placeholder="Write a short birthday message..."
+  ></textarea>
+  <small class="field-hint">Maximum 180 characters.</small>
+</div>
+    
 
           <div class="field">
             <label for="song-design">Choose a design</label>
