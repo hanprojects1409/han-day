@@ -231,7 +231,7 @@ function drawSongCard() {
   }
 
   canvasContext.font = "600 28px Inter, sans-serif";
-  canvasContext.fillText("A birthday song for HAN", 90, 1370);
+  canvasContext.fillText("A birthday gift for HAN", 90, 1370);
 
   canvasContext.font = "400 24px Inter, sans-serif";
   canvasContext.fillText("HAN DAY · HAN GLOBAL", 90, 1430);
