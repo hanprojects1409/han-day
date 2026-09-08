@@ -270,6 +270,24 @@
   line-height: 1.7;
 }
 
+    .validation-message {
+  margin-top: 18px;
+  border-left: 3px solid var(--black);
+  background: #fff1b8;
+  padding: 14px 16px;
+  color: var(--black);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.validation-message strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+    
     [hidden] {
       display: none !important;
     }
@@ -365,7 +383,25 @@
   <small class="field-hint">Maximum 180 characters.</small>
 </div>
     
+<div class="content-warning">
+  <strong>Please keep your dedication respectful.</strong>
+  <p>
+    Do not use profanity, insults, sexual content, or messages that could
+    harm HAN’s image. All submissions should be kind and appropriate.
+  </p>
+</div>
 
+<p id="validation-message" class="validation-message" hidden></p>
+
+<div class="field">
+  <label for="song-design">Choose a design</label>
+  <select id="song-design">
+    <option value="yellow">Pastel yellow</option>
+    <option value="cream">Cream</option>
+    <option value="black">Black</option>
+  </select>
+</div>
+          
           <div class="field">
             <label for="song-design">Choose a design</label>
             <select id="song-design">
@@ -405,7 +441,7 @@
 
         <div class="hashtags">
           <strong>Hashtags for your post</strong>
-          #HAN #HAN_DAY #HAN_GLOBAL #StrayKids #HappyHANDay
+          #HAN_DAY #HappyHANDay
           <span id="copy-status"></span>
         </div>
       </section>
