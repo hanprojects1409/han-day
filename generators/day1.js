@@ -10,14 +10,154 @@ const downloadSongButton = document.querySelector("#download-song");
 const copyHashtagsButton = document.querySelector("#copy-hashtags");
 const backToFormButton = document.querySelector("#back-to-form");
 const copyStatus = document.querySelector("#copy-status");
+const blockedWords = [
+  "puto",
+  "puta",
+  "pendejo",
+  "pendeja",
+  "idiota",
+  "estupido",
+  "estúpido",
+  "estupida",
+  "estúpida",
+  "mierda",
+  "chingar",
+  "chingada",
+  "chingado",
+  "verga",
+  "cabron",
+  "cabrón",
+  "marica",
+  "maricon",
+  "maricón",
+    "fuck",
+  "fucking",
+  "fucked",
+  "motherfucker",
+  "motherfuckers",
+  "shit",
+  "shitty",
+  "bullshit",
+  "bitch",
+  "bitches",
+  "bitchy",
+  "asshole",
+  "assholes",
+  "dumbass",
+  "jackass",
+  "bastard",
+  "damn",
+  "goddamn",
+  "hell",
+    "slut",
+  "sluts",
+  "slutty",
+  "whore",
+  "whores",
+  "hoe",
+  "hoes",
+  "skank",
+  "skanks",
+  "tramp",
+  "tramps",
+  "harlot",
+  "thot",
+  "thots",
+  "bimbo",
+  "bimbos",
+  "cunt",
+  "cunts",
+  "twat",
+  "twats",
+  "dick",
+  "dicks",
+  "dickhead",
+  "dickheads",
+  "cock",
+  "cocks",
+  "pussy",
+  "pussies",
+  "prick",
+  "pricks",
+  "wanker",
+  "wankers",
+  "jerkoff",
+  "jerk-off",
+  "jackoff",
+  "jack-off",
+    "porn",
+  "porno",
+  "pornography",
+  "pornographic",
+  "xxx",
+  "sexcam",
+  "camgirl",
+  "camboy",
+  "onlyfans",
+  "nudes",
+  "nude",
+  "dickpic",
+  "dick pics",
+  "send nudes",
+  "suck my",
+  "fuck me",
+  "fuck you",
+  "go fuck",
+  "eat shit",
+  "blowjob",
+  "blow job",
+  "handjob",
+  "hand job",
+  "cum",
+  "cumming",
+  "jizz",
+  "semen",
+  "orgasm",
+  "masturbate",
+  "masturbation",
+    "fag",
+  "faggot",
+  "faggots",
+  "dyke",
+  "retard",
+  "retarded",
+  "nigger",
+  "nigga",
+  "chink",
+  "spic",
+  "wetback",
+  "kike",
+  "tranny"
+];
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/0/g, "o")
+    .replace(/1/g, "i")
+    .replace(/3/g, "e")
+    .replace(/4/g, "a")
+    .replace(/5/g, "s")
+    .replace(/7/g, "t")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function containsBlockedWord(text) {
+  const normalizedText = normalizeText(text);
+
+  return blockedWords.some((word) => {
+    const normalizedWord = normalizeText(word);
+
+    return normalizedText.includes(normalizedWord);
+  });
+}
 
 const canvasContext = songCanvas.getContext("2d");
 
 const hashtags = [
-  "#HAN",
   "#HAN_DAY",
-  "#HAN_GLOBAL",
-  "#StrayKids",
   "#HappyHANDay"
 ];
 
@@ -59,14 +199,14 @@ function drawSongCard() {
   canvasContext.font = "500 34px Inter, sans-serif";
   canvasContext.fillText("My birthday dedication", 90, 610);
 
-  canvasContext.font = "500 72px 'Bodoni Moda', serif";
+  canvasContext.font = "500 92px 'Bodoni Moda', serif";
   canvasContext.fillText(songTitle, 90, 850);
 
   canvasContext.font = "400 34px Inter, sans-serif";
-  canvasContext.fillText(`by ${artistName}`, 90, 920);
+  canvasContext.fillText(`by ${artistName}`, 90, 935);
 
   if (message) {
-    canvasContext.font = "400 34px Inter, sans-serif";
+    canvasContext.font = "400 44px Inter, sans-serif";
 
     const words = message.split(" ");
     let line = "";
@@ -98,6 +238,19 @@ function drawSongCard() {
 
 day1Form.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  const songTitle = songTitleInput.value.trim();
+  const artistName = artistNameInput.value.trim();
+  const message = songMessageInput.value.trim();
+
+  const combinedText = `${songTitle} ${artistName} ${message}`;
+
+  if (containsBlockedWord(combinedText)) {
+    alert(
+      "Please use respectful language. Profanity or harmful content is not allowed."
+    );
+    return;
+  }
 
   drawSongCard();
 
