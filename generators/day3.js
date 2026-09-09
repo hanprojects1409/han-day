@@ -34,6 +34,10 @@ const postcardCopyStatus = document.querySelector(
   "#postcard-copy-status"
 );
 
+const postcardSignatureInput = document.querySelector(
+  "#postcard-signature"
+);
+
 const postcardCanvasContext = postcardCanvas.getContext("2d");
 
 const postcardHashtags = [
@@ -182,11 +186,15 @@ function normalizePostcardText(text) {
 }
 
 function containsProhibitedPostcardWord(message) {
-  const normalizedMessage = normalizePostcardText(message);
+  const normalizedMessage =
+    normalizePostcardText(message);
 
   return prohibitedPostcardWords.some(function (word) {
+    const normalizedWord =
+      normalizePostcardText(word);
+
     return normalizedMessage.includes(
-      normalizePostcardText(word)
+      normalizedWord
     );
   });
 }
@@ -313,7 +321,7 @@ function drawPostcardMessage(
 
   const lineHeight = fontSize * 1.45;
   const centerX = 600;
-  const centerY = 820;
+  const centerY = 885;
 
   const totalHeight =
     lines.length * lineHeight;
@@ -337,7 +345,8 @@ function drawPostcardMessage(
 function drawPostcardCard(
   countryName,
   countryFlag,
-  message
+  message,
+  signature
 ) {
   postcardCanvas.width = 1200;
   postcardCanvas.height = 1500;
@@ -443,53 +452,57 @@ function drawPostcardCard(
   ctx.font = "500 64px Bodoni Moda, serif";
 
   ctx.fillText(
-    "A POSTCARD",
-    600,
-    350
-  );
+  ctx.font = "500 43px Bodoni Moda, serif";
 
-  ctx.font = "500 48px Bodoni Moda, serif";
+ctx.fillText(
+  "STAY EVERYWHERE",
+  600,
+  350
+);
 
-  ctx.fillText(
-    "TO HAN",
-    600,
-    425
-  );
-
-  ctx.restore();
-
-  ctx.save();
-
-  ctx.font = "72px sans-serif";
-  ctx.textAlign = "center";
-
-  ctx.fillText(
-    countryFlag,
-    600,
-    545
-  );
+ctx.fillText(
+  "AROUND THE WORLD",
+  600,
+  415
+);
 
   ctx.restore();
 
   ctx.save();
 
-  ctx.fillStyle = "#3b3028";
-  ctx.textAlign = "center";
-  ctx.font = "600 25px Inter, sans-serif";
+ctx.fillStyle = "#3b3028";
+ctx.textAlign = "center";
+ctx.font = "600 23px Inter, sans-serif";
 
-  ctx.fillText(
-    countryName,
-    600,
-    620
-  );
+ctx.fillText(
+  `FROM: ${countryName.toUpperCase()}`,
+  600,
+  525
+);
 
-  ctx.restore();
+ctx.font = "72px sans-serif";
 
-  drawPostcardMessage(
-    ctx,
-    message
-  );
+ctx.fillText(
+  countryFlag,
+  600,
+  625
+);
 
+ctx.font = "600 23px Inter, sans-serif";
+
+ctx.fillText(
+  "TO: HAN",
+  600,
+  725
+);
+
+ctx.restore();
+
+drawPostcardMessage(
+  ctx,
+  message
+);
+  
   ctx.save();
 
   ctx.strokeStyle = "#d8cbb7";
@@ -511,10 +524,10 @@ function drawPostcardCard(
   ctx.font = "500 24px Inter, sans-serif";
 
   ctx.fillText(
-    "With love, STAY",
-    600,
-    1130
-  );
+  `With love, ${signature}`,
+  600,
+  1130
+);
 
   ctx.restore();
 
@@ -562,6 +575,9 @@ day3Form.addEventListener(
     const postcardMessage =
       postcardMessageInput.value.trim();
 
+    const postcardSignature =
+  postcardSignatureInput.value.trim();
+
     if (!countryName) {
       postcardValidationMessage.textContent =
         "Please select your country.";
@@ -590,13 +606,30 @@ day3Form.addEventListener(
       return;
     }
 
+    if (!postcardSignature) {
+  postcardValidationMessage.textContent =
+    "Please write your name or nickname.";
+
+  postcardValidationMessage.hidden = false;
+  return;
+}
+
+if (containsProhibitedPostcardWord(postcardSignature)) {
+  postcardValidationMessage.textContent =
+    "Please use a respectful name or nickname without inappropriate language.";
+
+  postcardValidationMessage.hidden = false;
+  return;
+}
+    
     postcardValidationMessage.textContent = "";
     postcardValidationMessage.hidden = true;
 
     drawPostcardCard(
       countryName,
       countryFlag,
-      postcardMessage
+      postcardMessage,
+      postcardSignature
     );
 
     day3Form.closest("section").hidden = true;
@@ -656,6 +689,7 @@ backToPostcardFormButton.addEventListener(
 
     countrySelect.value = "";
     postcardMessageInput.value = "";
+    postcardSignatureInput.value = "";
 
     postcardValidationMessage.textContent = "";
     postcardValidationMessage.hidden = true;
