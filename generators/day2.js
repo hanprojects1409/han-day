@@ -80,8 +80,8 @@ ctx.fillRect(0, 0, wishCanvas.width, wishCanvas.height);
 function drawWishStar(ctx, isShining) {
   const centerX = 600;
   const centerY = 780;
-  const outerRadius = 285;
-  const innerRadius = 125;
+  const outerRadius = 340;
+  const innerRadius = 155;
 
   ctx.save();
 
@@ -105,10 +105,11 @@ function drawWishStar(ctx, isShining) {
   drawStarShape(ctx, centerX, centerY, outerRadius, innerRadius);
 
   if (isShining) {
-    drawSparkle(ctx, 315, 570, 28);
-    drawSparkle(ctx, 885, 575, 22);
-    drawSparkle(ctx, 300, 975, 20);
-    drawSparkle(ctx, 900, 970, 28);
+  drawSparkle(ctx, 270, 540, 42);
+  drawSparkle(ctx, 930, 560, 34);
+  drawSparkle(ctx, 250, 1010, 30);
+  drawSparkle(ctx, 950, 990, 44);
+  drawSparkle(ctx, 600, 430, 22);
   }
 
   ctx.restore();
@@ -118,49 +119,69 @@ function drawSparkle(ctx, x, y, size) {
   ctx.save();
 
   ctx.translate(x, y);
-  ctx.rotate(Math.PI / 4);
 
-  const gradient = ctx.createLinearGradient(
+  const glow = ctx.createRadialGradient(
     0,
-    -size,
     0,
-    size
+    0,
+    0,
+    0,
+    size * 1.8
   );
 
-  gradient.addColorStop(0, "rgba(255, 255, 255, 0)");
-  gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.9)");
-  gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+  glow.addColorStop(0, "rgba(255, 255, 255, 0.9)");
+  glow.addColorStop(0.35, "rgba(255, 244, 170, 0.45)");
+  glow.addColorStop(1, "rgba(255, 244, 170, 0)");
 
-  ctx.fillStyle = gradient;
+  ctx.fillStyle = glow;
   ctx.beginPath();
+  ctx.arc(0, 0, size * 1.8, 0, Math.PI * 2);
+  ctx.fill();
 
+  ctx.beginPath();
   ctx.moveTo(0, -size);
   ctx.quadraticCurveTo(
-    size * 0.2,
+    size * 0.18,
     -size * 0.2,
-    size,
+    size * 0.42,
     0
   );
   ctx.quadraticCurveTo(
-    size * 0.2,
+    size * 0.18,
     size * 0.2,
     0,
     size
   );
   ctx.quadraticCurveTo(
-    -size * 0.2,
+    -size * 0.18,
     size * 0.2,
-    -size,
+    -size * 0.42,
     0
   );
   ctx.quadraticCurveTo(
-    -size * 0.2,
+    -size * 0.18,
     -size * 0.2,
     0,
     -size
   );
 
+  ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+  ctx.fill();
+
+  ctx.rotate(Math.PI / 4);
+
+  ctx.beginPath();
+  ctx.moveTo(0, -size * 0.7);
+  ctx.lineTo(size * 0.16, -size * 0.16);
+  ctx.lineTo(size * 0.7, 0);
+  ctx.lineTo(size * 0.16, size * 0.16);
+  ctx.lineTo(0, size * 0.7);
+  ctx.lineTo(-size * 0.16, size * 0.16);
+  ctx.lineTo(-size * 0.7, 0);
+  ctx.lineTo(-size * 0.16, -size * 0.16);
   ctx.closePath();
+
+  ctx.fillStyle = "rgba(255, 244, 170, 0.85)";
   ctx.fill();
 
   ctx.restore();
@@ -171,7 +192,7 @@ function drawTextInsideStar(ctx, wishMessage) {
   const lines = [];
   let currentLine = "";
 
-  ctx.font = "400 32px Inter, sans-serif";
+  ctx.font = "400 48px Parisienne, cursive";
 
   words.forEach(function (word) {
     const testLine = `${currentLine} ${word}`.trim();
@@ -205,83 +226,167 @@ function drawShootingStar(ctx) {
   ctx.save();
 
   ctx.beginPath();
-  ctx.moveTo(180, 1030);
+  ctx.moveTo(120, 1060);
 
   ctx.bezierCurveTo(
-    300,
-    920,
+    270,
+    930,
     390,
     820,
-    520,
-    730
+    540,
+    720
   );
 
-  ctx.strokeStyle = "rgba(255, 244, 170, 0.18)";
-  ctx.lineWidth = 90;
+  ctx.strokeStyle = "rgba(255, 235, 150, 0.12)";
+  ctx.lineWidth = 150;
   ctx.lineCap = "round";
+  ctx.shadowColor = "rgba(255, 235, 150, 0.3)";
+  ctx.shadowBlur = 70;
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.moveTo(230, 990);
+  ctx.moveTo(150, 1030);
 
   ctx.bezierCurveTo(
-    350,
-    890,
-    420,
+    290,
+    920,
+    410,
     810,
-    535,
-    730
+    550,
+    720
   );
 
-  ctx.strokeStyle = "rgba(255, 244, 170, 0.45)";
-  ctx.lineWidth = 34;
+  ctx.strokeStyle = "rgba(255, 244, 170, 0.28)";
+  ctx.lineWidth = 75;
+  ctx.shadowBlur = 35;
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.moveTo(300, 930);
+  ctx.moveTo(190, 1000);
 
   ctx.bezierCurveTo(
-    390,
-    850,
-    450,
-    790,
-    545,
-    730
+    320,
+    900,
+    430,
+    805,
+    555,
+    720
   );
 
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
-  ctx.lineWidth = 8;
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.72)";
+  ctx.lineWidth = 18;
+  ctx.shadowBlur = 18;
   ctx.stroke();
 
-  drawStarShape(ctx, centerX, centerY, 230, 100);
+  ctx.shadowColor = "transparent";
+  ctx.shadowBlur = 0;
+
+  drawShootingStarShape(ctx, centerX, centerY);
+
+  drawSparkle(ctx, 300, 850, 25);
+  drawSparkle(ctx, 410, 760, 18);
+  drawSparkle(ctx, 760, 570, 22);
+  drawSparkle(ctx, 850, 880, 18);
+
+  ctx.restore();
+}
+
+function drawShootingStarShape(ctx, centerX, centerY) {
+  ctx.save();
+
+  ctx.translate(centerX, centerY);
+  ctx.rotate(-Math.PI / 10);
+
+  const gradient = ctx.createRadialGradient(
+    -35,
+    -45,
+    15,
+    0,
+    0,
+    230
+  );
+
+  gradient.addColorStop(0, "#fffde5");
+  gradient.addColorStop(0.45, "#f8e99b");
+  gradient.addColorStop(1, "#d5b64d");
+
+  ctx.fillStyle = gradient;
+
+  ctx.beginPath();
+  ctx.moveTo(0, -220);
+  ctx.bezierCurveTo(
+    22,
+    -90,
+    70,
+    -25,
+    220,
+    0
+  );
+  ctx.bezierCurveTo(
+    75,
+    25,
+    25,
+    75,
+    0,
+    220
+  );
+  ctx.bezierCurveTo(
+    -25,
+    75,
+    -75,
+    25,
+    -220,
+    0
+  );
+  ctx.bezierCurveTo(
+    -75,
+    -25,
+    -22,
+    -90,
+    0,
+    -220
+  );
+
+  ctx.closePath();
+
+  ctx.shadowColor = "rgba(255, 239, 150, 0.65)";
+  ctx.shadowBlur = 45;
+  ctx.fill();
+
+  ctx.shadowColor = "transparent";
+  ctx.shadowBlur = 0;
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
+  ctx.stroke();
 
   ctx.restore();
 }
 
 function drawStarShape(ctx, centerX, centerY, outerRadius, innerRadius) {
   const points = 5;
+  const rotation = -Math.PI / 2;
 
   ctx.save();
 
   const gradient = ctx.createRadialGradient(
-    centerX - 80,
-    centerY - 100,
+    centerX - 90,
+    centerY - 110,
     20,
     centerX,
     centerY,
     outerRadius
   );
 
-  gradient.addColorStop(0, "#fff7bd");
-  gradient.addColorStop(0.55, "#f8e99b");
-  gradient.addColorStop(1, "#e6c95d");
+  gradient.addColorStop(0, "#fffbd7");
+  gradient.addColorStop(0.5, "#f8e99b");
+  gradient.addColorStop(1, "#d8b94e");
 
   ctx.fillStyle = gradient;
-
   ctx.beginPath();
 
   for (let i = 0; i < points * 2; i++) {
-    const angle = -Math.PI / 2 + (i * Math.PI) / points;
+    const angle = rotation + (i * Math.PI) / points;
     const radius = i % 2 === 0 ? outerRadius : innerRadius;
 
     const x = centerX + Math.cos(angle) * radius;
@@ -290,22 +395,26 @@ function drawStarShape(ctx, centerX, centerY, outerRadius, innerRadius) {
     if (i === 0) {
       ctx.moveTo(x, y);
     } else {
-      ctx.lineTo(x, y);
+      ctx.quadraticCurveTo(
+        centerX + Math.cos(angle - 0.04) * radius,
+        centerY + Math.sin(angle - 0.04) * radius,
+        x,
+        y
+      );
     }
   }
 
   ctx.closePath();
 
-  ctx.shadowColor = "rgba(255, 232, 130, 0.35)";
-  ctx.shadowBlur = 28;
+  ctx.shadowColor = "rgba(255, 235, 145, 0.45)";
+  ctx.shadowBlur = 35;
   ctx.fill();
 
   ctx.shadowColor = "transparent";
   ctx.shadowBlur = 0;
 
-  // Borde fino y suave
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
   ctx.stroke();
 
   ctx.restore();
@@ -316,7 +425,7 @@ function drawTextBelowStar(ctx, wishMessage) {
   const lines = [];
   let currentLine = "";
 
-  ctx.font = "400 36px Inter, sans-serif";
+  ctx.font = "400 48px Parisienne, cursive";
 
   words.forEach(function (word) {
     const testLine = `${currentLine} ${word}`.trim();
