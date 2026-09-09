@@ -31,10 +31,6 @@ const wishCopyStatus = document.querySelector(
 const wishCanvasContext = wishCanvas.getContext("2d");
 
 
-/* =========================
-   HASHTAGS
-========================= */
-
 const wishHashtags = [
   "#HAN_DAY",
   "#HappyHANDay"
@@ -575,9 +571,6 @@ downloadWishButton.addEventListener(
 );
 
 
-/* =========================
-   COPY HASHTAGS
-========================= */
 
 copyWishHashtagsButton.addEventListener(
   "click",
