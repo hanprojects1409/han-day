@@ -1,5 +1,7 @@
 const day2Form = document.querySelector("#day2-form");
+
 const wishMessageInput = document.querySelector("#wish-message");
+
 const wishValidationMessage = document.querySelector(
   "#wish-validation-message"
 );
@@ -9,244 +11,128 @@ const wishCreationSection = document.querySelector(
 );
 
 const wishCanvas = document.querySelector("#wish-canvas");
-const downloadWishButton = document.querySelector("#download-wish");
+
+const downloadWishButton = document.querySelector(
+  "#download-wish"
+);
+
 const copyWishHashtagsButton = document.querySelector(
   "#copy-wish-hashtags"
 );
+
 const backToWishFormButton = document.querySelector(
   "#back-to-wish-form"
 );
-const wishCopyStatus = document.querySelector("#wish-copy-status");
+
+const wishCopyStatus = document.querySelector(
+  "#wish-copy-status"
+);
 
 const wishCanvasContext = wishCanvas.getContext("2d");
+
+
+/* =========================
+   HASHTAGS
+========================= */
 
 const wishHashtags = [
   "#HAN_DAY",
   "#HappyHANDay"
 ];
 
+
 const prohibitedWishWords = [
-    "puto",
+  "fuck",
+  "fucking",
+  "shit",
+  "bitch",
+  "asshole",
+  "damn",
+  "sex",
+  "sexy",
+  "porn",
+  "nude",
+  "kill",
+  "die",
+  "hate",
+  "stupid",
+  "idiot",
+  "dumb",
+  "bastard",
   "puta",
+  "puto",
+  "mierda",
   "pendejo",
   "pendeja",
-  "idiota",
   "estupido",
-  "estúpido",
   "estupida",
-  "estúpida",
-  "mierda",
-  "chingar",
-  "chingada",
-  "chingado",
-  "verga",
-  "cabron",
-  "cabrón",
-  "marica",
-  "maricon",
-  "maricón",
-    "fuck",
-  "fucking",
-  "fucked",
-  "motherfucker",
-  "motherfuckers",
-  "shit",
-  "shitty",
-  "bullshit",
-  "bitch",
-  "bitches",
-  "bitchy",
-  "asshole",
-  "assholes",
-  "dumbass",
-  "jackass",
-  "bastard",
-  "damn",
-  "goddamn",
-  "hell",
-    "slut",
-  "sluts",
-  "slutty",
-  "whore",
-  "whores",
-  "hoe",
-  "hoes",
-  "skank",
-  "skanks",
-  "tramp",
-  "tramps",
-  "harlot",
-  "thot",
-  "thots",
-  "bimbo",
-  "bimbos",
-  "cunt",
-  "cunts",
-  "twat",
-  "twats",
-  "dick",
-  "dicks",
-  "dickhead",
-  "dickheads",
-  "cock",
-  "cocks",
-  "pussy",
-  "pussies",
-  "prick",
-  "pricks",
-  "wanker",
-  "wankers",
-  "jerkoff",
-  "jerk-off",
-  "jackoff",
-  "jack-off",
-    "porn",
-  "porno",
-  "pornography",
-  "pornographic",
-  "xxx",
-  "sexcam",
-  "camgirl",
-  "camboy",
-  "onlyfans",
-  "nudes",
-  "nude",
-  "dickpic",
-  "dick pics",
-  "send nudes",
-  "suck my",
-  "fuck me",
-  "fuck you",
-  "go fuck",
-  "eat shit",
-  "blowjob",
-  "blow job",
-  "handjob",
-  "hand job",
-  "cum",
-  "cumming",
-  "jizz",
-  "semen",
-  "orgasm",
-  "masturbate",
-  "masturbation",
-    "fag",
-  "faggot",
-  "faggots",
-  "dyke",
-  "retard",
-  "retarded",
-  "nigger",
-  "nigga",
-  "chink",
-  "spic",
-  "wetback",
-  "kike",
-  "tranny",
-  "die",
-  "dying"
+  "odio",
+  "matar"
 ];
 
-function drawWishCard(wishMessage) {
-  wishCanvas.width = 1200;
-  wishCanvas.height = 1500;
 
-  const ctx = wishCanvasContext;
 
-  const skyGradient = ctx.createLinearGradient(
-    0,
-    0,
-    0,
-    wishCanvas.height
-  );
-
-  skyGradient.addColorStop(0, "#0b1830");
-  skyGradient.addColorStop(0.55, "#18345b");
-  skyGradient.addColorStop(1, "#315b82");
-
-  ctx.fillStyle = skyGradient;
-  ctx.fillRect(
-    0,
-    0,
-    wishCanvas.width,
-    wishCanvas.height
-  );
-
-  ctx.fillStyle = "#ffffff";
-  ctx.textAlign = "left";
-
-  ctx.font = "500 42px Inter, sans-serif";
-  ctx.fillText("HAN GLOBAL", 90, 120);
-
-  ctx.font = "500 82px 'Bodoni Moda', serif";
-  ctx.fillText("MAKE A", 90, 280);
-  ctx.fillText("WISH FOR HAN", 90, 380);
-
-  drawWishStar(ctx);
-  drawTextInsideStar(ctx, wishMessage);
-
-  ctx.save();
-
-ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
-ctx.beginPath();
-
-if (typeof ctx.roundRect === "function") {
-  ctx.roundRect(65, 1360, 1070, 90, 45);
-} else {
-  ctx.rect(65, 1360, 1070, 90);
-}
-
-ctx.fill();
-
-ctx.textAlign = "center";
-ctx.fillStyle = "#f8e99b";
-ctx.font = "500 27px Inter, sans-serif";
-
-ctx.fillText(
-  "#HAN_DAY  #HappyHANDay",
-  wishCanvas.width / 2,
-  1415
-);
-
-ctx.restore();
-}
-
-function drawWishStar(ctx) {
-  const centerX = 600;
-  const centerY = 780;
-
-  const outerRadius = 365;
-  const innerRadius = 220;
-
-  ctx.save();
-
-  const glow = ctx.createRadialGradient(
-    centerX,
-    centerY,
-    20,
-    centerX,
-    centerY,
-    390
-  );
-
-  glow.addColorStop(0, "rgba(255, 244, 170, 0.28)");
-  glow.addColorStop(1, "rgba(255, 244, 170, 0)");
-
-  ctx.fillStyle = glow;
+function drawRoundedRect(
+  ctx,
+  x,
+  y,
+  width,
+  height,
+  radius
+) {
   ctx.beginPath();
-  ctx.arc(centerX, centerY, 390, 0, Math.PI * 2);
-  ctx.fill();
 
-  drawStarShape(
-    ctx,
-    centerX,
-    centerY,
-    outerRadius,
-    innerRadius
+  ctx.moveTo(x + radius, y);
+
+  ctx.lineTo(x + width - radius, y);
+
+  ctx.quadraticCurveTo(
+    x + width,
+    y,
+    x + width,
+    y + radius
   );
 
-  ctx.restore();
+  ctx.lineTo(
+    x + width,
+    y + height - radius
+  );
+
+  ctx.quadraticCurveTo(
+    x + width,
+    y + height,
+    x + width - radius,
+    y + height
+  );
+
+  ctx.lineTo(
+    x + radius,
+    y + height
+  );
+
+  ctx.quadraticCurveTo(
+    x,
+    y + height,
+    x,
+    y + height - radius
+  );
+
+  ctx.lineTo(
+    x,
+    y + radius
+  );
+
+  ctx.quadraticCurveTo(
+    x,
+    y,
+    x + radius,
+    y
+  );
+
+  ctx.closePath();
 }
+
+
 
 function drawStarShape(
   ctx,
@@ -256,20 +142,21 @@ function drawStarShape(
   innerRadius
 ) {
   const points = 5;
-  const rotation = -Math.PI / 2;
 
-  // ROUNDNESS 
-  const outerCornerRoundness = 0.38;
-  const innerCornerRoundness = 0.22;
+  const outerCornerRoundness = 0.30;
+  const innerCornerRoundness = 0.42;
 
   const vertices = [];
 
-  for (let i = 0; i < points * 2; i++) {
+  for (let index = 0; index < points * 2; index++) {
     const angle =
-      rotation + (i * Math.PI) / points;
+      -Math.PI / 2 +
+      (Math.PI * index) / points;
 
     const radius =
-      i % 2 === 0 ? outerRadius : innerRadius;
+      index % 2 === 0
+        ? outerRadius
+        : innerRadius;
 
     vertices.push({
       x: centerX + Math.cos(angle) * radius,
@@ -277,39 +164,27 @@ function drawStarShape(
     });
   }
 
-  ctx.save();
-
-  const gradient = ctx.createRadialGradient(
-    centerX - 130,
-    centerY - 150,
-    20,
-    centerX,
-    centerY,
-    outerRadius
-  );
-
-  gradient.addColorStop(0, "#fffde5");
-  gradient.addColorStop(0.48, "#f8e99b");
-  gradient.addColorStop(1, "#d7b84d");
-
-  ctx.fillStyle = gradient;
   ctx.beginPath();
 
-  for (let i = 0; i < vertices.length; i++) {
-    const current = vertices[i];
+  for (let index = 0; index < vertices.length; index++) {
+    const current = vertices[index];
 
     const previous =
       vertices[
-        (i - 1 + vertices.length) % vertices.length
+        (index - 1 + vertices.length) %
+          vertices.length
       ];
 
     const next =
-      vertices[(i + 1) % vertices.length];
+      vertices[
+        (index + 1) % vertices.length
+      ];
 
-    const roundness =
-      i % 2 === 0
-        ? outerCornerRoundness
-        : innerCornerRoundness;
+    const isOuter = index % 2 === 0;
+
+    const roundness = isOuter
+      ? outerCornerRoundness
+      : innerCornerRoundness;
 
     const startX =
       current.x +
@@ -327,7 +202,7 @@ function drawStarShape(
       current.y +
       (next.y - current.y) * roundness;
 
-    if (i === 0) {
+    if (index === 0) {
       ctx.moveTo(startX, startY);
     } else {
       ctx.lineTo(startX, startY);
@@ -342,46 +217,84 @@ function drawStarShape(
   }
 
   ctx.closePath();
+}
 
-  ctx.shadowColor = "rgba(255, 235, 145, 0.40)";
-  ctx.shadowBlur = 30;
 
+
+function drawWishStar(ctx) {
+  const centerX = 600;
+  const centerY = 780;
+
+  const outerRadius = 365;
+  const innerRadius = 220;
+
+  ctx.save();
+
+  ctx.shadowColor = "rgba(255, 255, 255, 0.12)";
+  ctx.shadowBlur = 35;
+
+  drawStarShape(
+    ctx,
+    centerX,
+    centerY,
+    outerRadius,
+    innerRadius
+  );
+
+  ctx.fillStyle = "#f8e99b";
   ctx.fill();
 
-  ctx.shadowColor = "transparent";
-  ctx.shadowBlur = 0;
+  ctx.restore();
 
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
-  ctx.stroke();
+  ctx.save();
+
+  drawStarShape(
+    ctx,
+    centerX,
+    centerY,
+    outerRadius - 12,
+    innerRadius - 12
+  );
+
+  ctx.fillStyle = "#fff7c9";
+  ctx.fill();
 
   ctx.restore();
 }
 
-function drawTextInsideStar(ctx, wishMessage) {
-  const words = wishMessage.split(/\s+/);
-  const lines = [];
 
-  let currentLine = "";
-  let fontSize = 48;
+
+function drawTextInsideStar(ctx, message) {
+  const centerX = 600;
+  const centerY = 780;
+
   const maxWidth = 430;
 
-  function createLines() {
-    lines.length = 0;
-    currentLine = "";
+  let fontSize = 42;
 
-    ctx.font = `${fontSize}px "Gveret Levin"`;
+  let lines = [];
+
+  function createLines() {
+    ctx.font = `${fontSize}px "Gveret Levin", cursive`;
+
+    const words = message.split(" ");
+
+    const result = [];
+
+    let currentLine = "";
 
     words.forEach(function (word) {
       const testLine = currentLine
         ? `${currentLine} ${word}`
         : word;
 
+      const testWidth = ctx.measureText(testLine).width;
+
       if (
-        currentLine &&
-        ctx.measureText(testLine).width > maxWidth
+        testWidth > maxWidth &&
+        currentLine
       ) {
-        lines.push(currentLine);
+        result.push(currentLine);
         currentLine = word;
       } else {
         currentLine = testLine;
@@ -389,111 +302,324 @@ function drawTextInsideStar(ctx, wishMessage) {
     });
 
     if (currentLine) {
-      lines.push(currentLine);
+      result.push(currentLine);
     }
+
+    return result;
   }
 
-  createLines();
+  lines = createLines();
 
-  if (lines.length > 3) {
-    fontSize = 40;
-    createLines();
-  }
-
-  if (lines.length > 4) {
-    fontSize = 34;
-    createLines();
+  while (
+    lines.length > 4 &&
+    fontSize > 24
+  ) {
+    fontSize -= 2;
+    lines = createLines();
   }
 
   ctx.save();
 
+  ctx.font = `${fontSize}px "Gveret Levin", cursive`;
   ctx.fillStyle = "#4a3b2e";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `${fontSize}px "Gveret Levin"`;
 
-  const lineHeight = fontSize * 1.2;
-  const startY =
-    780 - ((lines.length - 1) * lineHeight) / 2;
+  const lineHeight = fontSize * 1.45;
+
+  const totalHeight =
+    lines.length * lineHeight;
+
+  const firstLineY =
+    centerY -
+    totalHeight / 2 +
+    lineHeight / 2;
 
   lines.forEach(function (line, index) {
     ctx.fillText(
       line,
-      600,
-      startY + index * lineHeight
+      centerX,
+      firstLineY + index * lineHeight
     );
   });
 
   ctx.restore();
 }
 
-day2Form.addEventListener("submit", function (event) {
-  event.preventDefault();
 
-  const wishMessage = wishMessageInput.value.trim();
 
-  if (!wishMessage) {
-    return;
+function drawWishCard(wishMessage) {
+  wishCanvas.width = 1200;
+  wishCanvas.height = 1500;
+
+  const ctx = wishCanvasContext;
+
+  ctx.clearRect(
+    0,
+    0,
+    wishCanvas.width,
+    wishCanvas.height
+  );
+
+
+
+  const backgroundGradient = ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    wishCanvas.height
+  );
+
+  backgroundGradient.addColorStop(
+    0,
+    "#7c91bd"
+  );
+
+  backgroundGradient.addColorStop(
+    1,
+    "#435b89"
+  );
+
+  ctx.fillStyle = backgroundGradient;
+
+  ctx.fillRect(
+    0,
+    0,
+    wishCanvas.width,
+    wishCanvas.height
+  );
+
+
+
+  ctx.save();
+
+  ctx.fillStyle = "#ffffff";
+  ctx.textAlign = "left";
+
+  ctx.font = "600 27px Inter, sans-serif";
+
+  ctx.fillText(
+    "HAN GLOBAL",
+    65,
+    85
+  );
+
+  ctx.font = "500 22px Inter, sans-serif";
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+
+  ctx.fillText(
+    "DAY 02",
+    65,
+    125
+  );
+
+  ctx.restore();
+
+
+
+
+  ctx.save();
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+
+  ctx.font = "500 65px Bodoni Moda, serif";
+
+  ctx.fillText(
+    "MAKE A",
+    wishCanvas.width / 2,
+    235
+  );
+
+  ctx.fillText(
+    "WISH FOR HAN",
+    wishCanvas.width / 2,
+    315
+  );
+
+  ctx.restore();
+
+
+  drawWishStar(ctx);
+
+  drawTextInsideStar(
+    ctx,
+    wishMessage
+  );
+
+
+
+  ctx.save();
+
+  ctx.fillStyle =
+    "rgba(255, 255, 255, 0.12)";
+
+  if (
+    typeof ctx.roundRect === "function"
+  ) {
+    ctx.beginPath();
+
+    ctx.roundRect(
+      65,
+      1360,
+      1070,
+      90,
+      45
+    );
+
+    ctx.fill();
+  } else {
+    drawRoundedRect(
+      ctx,
+      65,
+      1360,
+      1070,
+      90,
+      45
+    );
+
+    ctx.fill();
   }
 
-  const normalizedWish = wishMessage.toLowerCase();
+  ctx.textAlign = "center";
 
-  const containsProhibitedWord =
-    prohibitedWishWords.some(function (word) {
-      return normalizedWish.includes(word.toLowerCase());
-    });
+  ctx.fillStyle = "#f8e99b";
 
-  if (containsProhibitedWord) {
-    wishValidationMessage.textContent =
-      "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
+  ctx.font = "500 27px Inter, sans-serif";
 
-    wishValidationMessage.hidden = false;
+  ctx.fillText(
+    "#HAN_DAY  #HappyHANDay",
+    wishCanvas.width / 2,
+    1415
+  );
 
-    return;
-  }
+  ctx.restore();
+}
 
-  wishValidationMessage.hidden = true;
-  wishValidationMessage.textContent = "";
 
-  drawWishCard(wishMessage);
 
-  day2Form.closest("section").hidden = true;
-  wishCreationSection.hidden = false;
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+function containsProhibitedWishWord(message) {
+  const normalizedMessage = message
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  return prohibitedWishWords.some(function (word) {
+    const normalizedWord = word
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    return normalizedMessage.includes(
+      normalizedWord
+    );
   });
-});
+}
 
-downloadWishButton.addEventListener("click", function () {
-  const link = document.createElement("a");
 
-  link.download = "han-day-wish-card.png";
-  link.href = wishCanvas.toDataURL("image/png");
-  link.click();
-});
+day2Form.addEventListener(
+  "submit",
+  function (event) {
+    event.preventDefault();
+
+    const wishMessage =
+      wishMessageInput.value.trim();
+
+    if (!wishMessage) {
+      return;
+    }
+
+    if (
+      containsProhibitedWishWord(wishMessage)
+    ) {
+      wishValidationMessage.textContent =
+        "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
+
+      wishValidationMessage.hidden = false;
+
+      return;
+    }
+
+    wishValidationMessage.textContent = "";
+    wishValidationMessage.hidden = true;
+
+    drawWishCard(wishMessage);
+
+    day2Form.closest("section").hidden = true;
+
+    wishCreationSection.hidden = false;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+);
+
+
+downloadWishButton.addEventListener(
+  "click",
+  function () {
+    const link = document.createElement("a");
+
+    link.download = "han-day-wish.png";
+
+    link.href = wishCanvas.toDataURL(
+      "image/png"
+    );
+
+    link.click();
+  }
+);
+
+
+/* =========================
+   COPY HASHTAGS
+========================= */
 
 copyWishHashtagsButton.addEventListener(
   "click",
   async function () {
+    const hashtags = wishHashtags.join(" ");
+
     try {
       await navigator.clipboard.writeText(
-        wishHashtags.join(" ")
+        hashtags
       );
 
-      wishCopyStatus.textContent = "Copied!";
+      wishCopyStatus.textContent =
+        "Copied!";
+
+      setTimeout(function () {
+        wishCopyStatus.textContent = "";
+      }, 2000);
+
     } catch (error) {
-      wishCopyStatus.textContent = "Copy failed";
+      wishCopyStatus.textContent =
+        "Copy failed.";
     }
   }
 );
+
 
 backToWishFormButton.addEventListener(
   "click",
   function () {
     wishCreationSection.hidden = true;
+
     day2Form.closest("section").hidden = false;
-    wishCopyStatus.textContent = "";
+
+    wishMessageInput.value = "";
+
+    wishValidationMessage.textContent = "";
+
+    wishValidationMessage.hidden = true;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 );
