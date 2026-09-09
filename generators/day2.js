@@ -1,5 +1,8 @@
 const day2Form = document.querySelector("#day2-form");
 const wishMessageInput = document.querySelector("#wish-message");
+const wishValidationMessage = document.querySelector(
+  "#wish-validation-message"
+);
 
 const wishCreationSection = document.querySelector(
   "#wish-creation-section"
@@ -20,6 +23,128 @@ const wishCanvasContext = wishCanvas.getContext("2d");
 const wishHashtags = [
   "#HAN_DAY",
   "#HappyHANDay"
+];
+
+const prohibitedWishWords = [
+    "puto",
+  "puta",
+  "pendejo",
+  "pendeja",
+  "idiota",
+  "estupido",
+  "estúpido",
+  "estupida",
+  "estúpida",
+  "mierda",
+  "chingar",
+  "chingada",
+  "chingado",
+  "verga",
+  "cabron",
+  "cabrón",
+  "marica",
+  "maricon",
+  "maricón",
+    "fuck",
+  "fucking",
+  "fucked",
+  "motherfucker",
+  "motherfuckers",
+  "shit",
+  "shitty",
+  "bullshit",
+  "bitch",
+  "bitches",
+  "bitchy",
+  "asshole",
+  "assholes",
+  "dumbass",
+  "jackass",
+  "bastard",
+  "damn",
+  "goddamn",
+  "hell",
+    "slut",
+  "sluts",
+  "slutty",
+  "whore",
+  "whores",
+  "hoe",
+  "hoes",
+  "skank",
+  "skanks",
+  "tramp",
+  "tramps",
+  "harlot",
+  "thot",
+  "thots",
+  "bimbo",
+  "bimbos",
+  "cunt",
+  "cunts",
+  "twat",
+  "twats",
+  "dick",
+  "dicks",
+  "dickhead",
+  "dickheads",
+  "cock",
+  "cocks",
+  "pussy",
+  "pussies",
+  "prick",
+  "pricks",
+  "wanker",
+  "wankers",
+  "jerkoff",
+  "jerk-off",
+  "jackoff",
+  "jack-off",
+    "porn",
+  "porno",
+  "pornography",
+  "pornographic",
+  "xxx",
+  "sexcam",
+  "camgirl",
+  "camboy",
+  "onlyfans",
+  "nudes",
+  "nude",
+  "dickpic",
+  "dick pics",
+  "send nudes",
+  "suck my",
+  "fuck me",
+  "fuck you",
+  "go fuck",
+  "eat shit",
+  "blowjob",
+  "blow job",
+  "handjob",
+  "hand job",
+  "cum",
+  "cumming",
+  "jizz",
+  "semen",
+  "orgasm",
+  "masturbate",
+  "masturbation",
+    "fag",
+  "faggot",
+  "faggots",
+  "dyke",
+  "retard",
+  "retarded",
+  "nigger",
+  "nigga",
+  "chink",
+  "spic",
+  "wetback",
+  "kike",
+  "tranny",
+  "die",
+  "dying"
 ];
 
 function drawWishCard(wishMessage) {
@@ -310,6 +435,25 @@ day2Form.addEventListener("submit", function (event) {
   if (!wishMessage) {
     return;
   }
+
+  const normalizedWish = wishMessage.toLowerCase();
+
+  const containsProhibitedWord =
+    prohibitedWishWords.some(function (word) {
+      return normalizedWish.includes(word.toLowerCase());
+    });
+
+  if (containsProhibitedWord) {
+    wishValidationMessage.textContent =
+      "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
+
+    wishValidationMessage.hidden = false;
+
+    return;
+  }
+
+  wishValidationMessage.hidden = true;
+  wishValidationMessage.textContent = "";
 
   drawWishCard(wishMessage);
 
