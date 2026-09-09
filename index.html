@@ -569,6 +569,58 @@
         font-size: 26px;
       }
     }
+
+    /* =========================
+   DAY 3 CSS
+========================= */
+
+    .day3-intro {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.day3-intro h3 {
+  margin: 0 0 12px;
+  font-family: "Bodoni Moda", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.day3-intro p {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.day3-card select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid #d8d1c8;
+  border-radius: 0;
+  outline: none;
+  background: #fffdf8;
+  color: #3b3028;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.day3-card select:focus {
+  border-color: #3b3028;
+}
+
+@media (max-width: 700px) {
+  .day3-intro h3 {
+    font-size: 26px;
+  }
+}
   </style>
 </head>
 <body>
@@ -839,8 +891,6 @@
   <div class="day3-card">
 
     <div class="day3-intro">
-      <span class="day3-symbol">✉</span>
-
       <h3>A little postcard for HAN</h3>
 
       <p>
@@ -851,17 +901,119 @@
     <form id="day3-form" class="day-form">
 
       <div class="field">
-        <label for="postcard-country">
-          Your country
-        </label>
+  <label for="postcard-country">
+    Your country
+  </label>
 
-        <input
-          type="text"
-          id="postcard-country"
-          maxlength="40"
-          placeholder="Write your country..."
-          required
-        />
+  <select id="postcard-country" required>
+    <option value="" selected disabled>
+      Select your country...
+    </option>
+
+    <option value="Mexico" data-flag="🇲🇽">
+      Mexico
+    </option>
+
+    <option value="United States" data-flag="🇺🇸">
+      United States
+    </option>
+
+    <option value="Canada" data-flag="🇨🇦">
+      Canada
+    </option>
+
+    <option value="Brazil" data-flag="🇧🇷">
+      Brazil
+    </option>
+
+    <option value="Argentina" data-flag="🇦🇷">
+      Argentina
+    </option>
+
+    <option value="Chile" data-flag="🇨🇱">
+      Chile
+    </option>
+
+    <option value="Colombia" data-flag="🇨🇴">
+      Colombia
+    </option>
+
+    <option value="Peru" data-flag="🇵🇪">
+      Peru
+    </option>
+
+    <option value="Spain" data-flag="🇪🇸">
+      Spain
+    </option>
+
+    <option value="United Kingdom" data-flag="🇬🇧">
+      United Kingdom
+    </option>
+
+    <option value="France" data-flag="🇫🇷">
+      France
+    </option>
+
+    <option value="Italy" data-flag="🇮🇹">
+      Italy
+    </option>
+
+    <option value="Germany" data-flag="🇩🇪">
+      Germany
+    </option>
+
+    <option value="Australia" data-flag="🇦🇺">
+      Australia
+    </option>
+
+    <option value="New Zealand" data-flag="🇳🇿">
+      New Zealand
+    </option>
+
+    <option value="Japan" data-flag="🇯🇵">
+      Japan
+    </option>
+
+    <option value="South Korea" data-flag="🇰🇷">
+      South Korea
+    </option>
+
+    <option value="China" data-flag="🇨🇳">
+      China
+    </option>
+
+    <option value="Philippines" data-flag="🇵🇭">
+      Philippines
+    </option>
+
+    <option value="Thailand" data-flag="🇹🇭">
+      Thailand
+    </option>
+
+    <option value="Indonesia" data-flag="🇮🇩">
+      Indonesia
+    </option>
+
+    <option value="Malaysia" data-flag="🇲🇾">
+      Malaysia
+    </option>
+
+    <option value="Singapore" data-flag="🇸🇬">
+      Singapore
+    </option>
+
+    <option value="India" data-flag="🇮🇳">
+      India
+    </option>
+
+    <option value="Turkey" data-flag="🇹🇷">
+      Turkey
+    </option>
+
+    <option value="Other" data-flag="🌍">
+      Other
+    </option>
+  </select>
       </div>
 
       <div class="field">
