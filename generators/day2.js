@@ -82,8 +82,8 @@ function drawWishStar(ctx) {
   const centerX = 600;
   const centerY = 780;
 
-  const outerRadius = 360;
-  const innerRadius = 205;
+  const outerRadius = 365;
+  const innerRadius = 220;
 
   ctx.save();
 
@@ -96,7 +96,7 @@ function drawWishStar(ctx) {
     390
   );
 
-  glow.addColorStop(0, "rgba(255, 244, 170, 0.30)");
+  glow.addColorStop(0, "rgba(255, 244, 170, 0.28)");
   glow.addColorStop(1, "rgba(255, 244, 170, 0)");
 
   ctx.fillStyle = glow;
@@ -125,20 +125,22 @@ function drawStarShape(
   const points = 5;
   const rotation = -Math.PI / 2;
 
-  const outerCorner = 0.18;
-  const innerCorner = 0.30;
+  // ROUNDNESS 
+  const outerCornerRoundness = 0.30;
+  const innerCornerRoundness = 0.42;
 
   const vertices = [];
 
   for (let i = 0; i < points * 2; i++) {
-    const angle = rotation + (i * Math.PI) / points;
+    const angle =
+      rotation + (i * Math.PI) / points;
+
     const radius =
       i % 2 === 0 ? outerRadius : innerRadius;
 
     vertices.push({
       x: centerX + Math.cos(angle) * radius,
-      y: centerY + Math.sin(angle) * radius,
-      radius
+      y: centerY + Math.sin(angle) * radius
     });
   }
 
@@ -160,19 +162,21 @@ function drawStarShape(
   ctx.fillStyle = gradient;
   ctx.beginPath();
 
-  vertices.forEach(function (current, index) {
+  for (let i = 0; i < vertices.length; i++) {
+    const current = vertices[i];
+
     const previous =
       vertices[
-        (index - 1 + vertices.length) % vertices.length
+        (i - 1 + vertices.length) % vertices.length
       ];
 
     const next =
-      vertices[(index + 1) % vertices.length];
+      vertices[(i + 1) % vertices.length];
 
     const roundness =
-      index % 2 === 0
-        ? outerCorner
-        : innerCorner;
+      i % 2 === 0
+        ? outerCornerRoundness
+        : innerCornerRoundness;
 
     const startX =
       current.x +
@@ -190,7 +194,7 @@ function drawStarShape(
       current.y +
       (next.y - current.y) * roundness;
 
-    if (index === 0) {
+    if (i === 0) {
       ctx.moveTo(startX, startY);
     } else {
       ctx.lineTo(startX, startY);
@@ -202,19 +206,20 @@ function drawStarShape(
       endX,
       endY
     );
-  });
+  }
 
   ctx.closePath();
 
-  ctx.shadowColor = "rgba(255, 235, 145, 0.42)";
+  ctx.shadowColor = "rgba(255, 235, 145, 0.40)";
   ctx.shadowBlur = 30;
+
   ctx.fill();
 
   ctx.shadowColor = "transparent";
   ctx.shadowBlur = 0;
 
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
   ctx.stroke();
 
   ctx.restore();
