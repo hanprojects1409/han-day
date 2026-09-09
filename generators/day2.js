@@ -81,8 +81,9 @@ function drawWishCard(wishMessage) {
 function drawWishStar(ctx) {
   const centerX = 600;
   const centerY = 780;
-  const outerRadius = 340;
-  const innerRadius = 155;
+
+  const outerRadius = 360;
+  const innerRadius = 205;
 
   ctx.save();
 
@@ -92,15 +93,15 @@ function drawWishStar(ctx) {
     20,
     centerX,
     centerY,
-    370
+    390
   );
 
-  glow.addColorStop(0, "rgba(255, 244, 170, 0.28)");
+  glow.addColorStop(0, "rgba(255, 244, 170, 0.30)");
   glow.addColorStop(1, "rgba(255, 244, 170, 0)");
 
   ctx.fillStyle = glow;
   ctx.beginPath();
-  ctx.arc(centerX, centerY, 370, 0, Math.PI * 2);
+  ctx.arc(centerX, centerY, 390, 0, Math.PI * 2);
   ctx.fill();
 
   drawStarShape(
@@ -123,7 +124,9 @@ function drawStarShape(
 ) {
   const points = 5;
   const rotation = -Math.PI / 2;
-  const cornerRoundness = 0.22;
+
+  const outerCorner = 0.18;
+  const innerCorner = 0.30;
 
   const vertices = [];
 
@@ -134,15 +137,16 @@ function drawStarShape(
 
     vertices.push({
       x: centerX + Math.cos(angle) * radius,
-      y: centerY + Math.sin(angle) * radius
+      y: centerY + Math.sin(angle) * radius,
+      radius
     });
   }
 
   ctx.save();
 
   const gradient = ctx.createRadialGradient(
-    centerX - 110,
-    centerY - 130,
+    centerX - 130,
+    centerY - 150,
     20,
     centerX,
     centerY,
@@ -156,34 +160,37 @@ function drawStarShape(
   ctx.fillStyle = gradient;
   ctx.beginPath();
 
-  for (let i = 0; i < vertices.length; i++) {
-    const current = vertices[i];
-
+  vertices.forEach(function (current, index) {
     const previous =
       vertices[
-        (i - 1 + vertices.length) % vertices.length
+        (index - 1 + vertices.length) % vertices.length
       ];
 
     const next =
-      vertices[(i + 1) % vertices.length];
+      vertices[(index + 1) % vertices.length];
+
+    const roundness =
+      index % 2 === 0
+        ? outerCorner
+        : innerCorner;
 
     const startX =
       current.x +
-      (previous.x - current.x) * cornerRoundness;
+      (previous.x - current.x) * roundness;
 
     const startY =
       current.y +
-      (previous.y - current.y) * cornerRoundness;
+      (previous.y - current.y) * roundness;
 
     const endX =
       current.x +
-      (next.x - current.x) * cornerRoundness;
+      (next.x - current.x) * roundness;
 
     const endY =
       current.y +
-      (next.y - current.y) * cornerRoundness;
+      (next.y - current.y) * roundness;
 
-    if (i === 0) {
+    if (index === 0) {
       ctx.moveTo(startX, startY);
     } else {
       ctx.lineTo(startX, startY);
@@ -195,19 +202,19 @@ function drawStarShape(
       endX,
       endY
     );
-  }
+  });
 
   ctx.closePath();
 
-  ctx.shadowColor = "rgba(255, 235, 145, 0.45)";
-  ctx.shadowBlur = 35;
+  ctx.shadowColor = "rgba(255, 235, 145, 0.42)";
+  ctx.shadowBlur = 30;
   ctx.fill();
 
   ctx.shadowColor = "transparent";
   ctx.shadowBlur = 0;
 
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
   ctx.stroke();
 
   ctx.restore();
@@ -225,7 +232,7 @@ function drawTextInsideStar(ctx, wishMessage) {
     lines.length = 0;
     currentLine = "";
 
-    ctx.font = `${fontSize}px "Gveret Levin", cursive`;
+    ctx.font = `${fontSize}px "Gveret Levin";
 
     words.forEach(function (word) {
       const testLine = currentLine
@@ -265,7 +272,7 @@ function drawTextInsideStar(ctx, wishMessage) {
   ctx.fillStyle = "#4a3b2e";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `${fontSize}px "Gveret Levin", cursive`;
+  ctx.font = `${fontSize}px "Gveret Levin";
 
   const lineHeight = fontSize * 1.2;
   const startY =
