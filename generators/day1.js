@@ -128,7 +128,9 @@ const blockedWords = [
   "spic",
   "wetback",
   "kike",
-  "tranny"
+  "tranny",
+  "die",
+  "dying"
 ];
 
 function normalizeText(text) {
