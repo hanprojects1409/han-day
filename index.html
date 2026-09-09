@@ -818,6 +818,152 @@
   </div>
 
 </section>
+
+
+      
+      <section id="day3-section" class="day-section">
+
+  <section class="intro day3-intro-heading">
+    <div class="eyebrow">A message from STAY around the world</div>
+
+    <h1>
+      A postcard<br />
+      to HAN
+    </h1>
+
+    <p>
+      Send HAN a little message from your corner of the world.
+    </p>
+  </section>
+
+  <div class="day3-card">
+
+    <div class="day3-intro">
+      <span class="day3-symbol">✉</span>
+
+      <h3>A little postcard for HAN</h3>
+
+      <p>
+        Tell HAN where your message is coming from.
+      </p>
+    </div>
+
+    <form id="day3-form" class="day-form">
+
+      <div class="field">
+        <label for="postcard-country">
+          Your country
+        </label>
+
+        <input
+          type="text"
+          id="postcard-country"
+          maxlength="40"
+          placeholder="Write your country..."
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="postcard-message">
+          Your message
+        </label>
+
+        <textarea
+          id="postcard-message"
+          maxlength="100"
+          placeholder="Write a message for HAN..."
+          required
+        ></textarea>
+
+        <small>
+          100 characters maximum
+        </small>
+      </div>
+
+      <div class="content-warning">
+        <strong>
+          Please keep your message respectful.
+        </strong>
+
+        <p>
+          Write something kind, positive and appropriate for HAN.
+          Every message should be made with love and respect.
+        </p>
+      </div>
+
+      <p
+        id="postcard-validation-message"
+        class="validation-message"
+        hidden
+      ></p>
+
+      <button
+        type="submit"
+        class="primary-button"
+      >
+        Create my postcard
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+<section
+  class="creation"
+  id="postcard-creation-section"
+  hidden
+>
+
+  <h2>Your postcard</h2>
+
+  <div class="canvas-wrapper">
+    <canvas id="postcard-canvas"></canvas>
+  </div>
+
+  <div class="creation-actions">
+
+    <button
+      class="primary-button"
+      id="download-postcard"
+      type="button"
+    >
+      Download
+    </button>
+
+    <button
+      class="secondary-button"
+      id="copy-postcard-hashtags"
+      type="button"
+    >
+      Copy hashtags
+    </button>
+
+    <button
+      class="secondary-button"
+      id="back-to-postcard-form"
+      type="button"
+    >
+      Back
+    </button>
+
+  </div>
+
+  <div class="hashtags">
+    <strong>
+      Hashtags for your post
+    </strong>
+
+    <p>
+      #HAN_DAY #HappyHANDay
+    </p>
+
+    <span id="postcard-copy-status"></span>
+  </div>
+
+</section>
+
       
       <footer>
         HAN GLOBAL · Made with love for HAN
