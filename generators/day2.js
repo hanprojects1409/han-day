@@ -36,9 +36,7 @@ const wishHashtags = [
   "#HappyHANDay"
 ];
 
-
 const prohibitedWishWords = [
-const blockedWords = [
   "puto",
   "puta",
   "pendejo",
@@ -58,7 +56,8 @@ const blockedWords = [
   "marica",
   "maricon",
   "maricón",
-    "fuck",
+
+  "fuck",
   "fucking",
   "fucked",
   "motherfucker",
@@ -77,7 +76,8 @@ const blockedWords = [
   "damn",
   "goddamn",
   "hell",
-    "slut",
+
+  "slut",
   "sluts",
   "slutty",
   "whore",
@@ -113,7 +113,8 @@ const blockedWords = [
   "jerk-off",
   "jackoff",
   "jack-off",
-    "porn",
+
+  "porn",
   "porno",
   "pornography",
   "pornographic",
@@ -143,7 +144,8 @@ const blockedWords = [
   "orgasm",
   "masturbate",
   "masturbation",
-    "fag",
+
+  "fag",
   "faggot",
   "faggots",
   "dyke",
@@ -173,8 +175,6 @@ function normalizeText(text) {
     .replace(/7/g, "t")
     .replace(/[^a-z0-9]/g, "");
 }
-
-
 
 function drawRoundedRect(
   ctx,
@@ -605,20 +605,12 @@ function drawWishCard(wishMessage) {
 
 
 function containsProhibitedWishWord(message) {
-  const normalizedMessage = message
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  const normalizedMessage = normalizeText(message);
 
   return prohibitedWishWords.some(function (word) {
-    const normalizedWord = word
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+    const normalizedWord = normalizeText(word);
 
-    return normalizedMessage.includes(
-      normalizedWord
-    );
+    return normalizedMessage.includes(normalizedWord);
   });
 }
 
@@ -637,21 +629,7 @@ day2Form.addEventListener("submit", function (event) {
     return;
   }
 
-  const normalizedWish = wishMessage
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-
-  const containsProhibitedWord = prohibitedWishWords.some(function (word) {
-    const normalizedWord = word
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-
-    return normalizedWish.includes(normalizedWord);
-  });
-
-  if (containsProhibitedWord) {
+  if (containsProhibitedWishWord(wishMessage)) {
     wishValidationMessage.textContent =
       "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
 
