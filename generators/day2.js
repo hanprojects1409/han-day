@@ -247,8 +247,8 @@ function drawStarShape(
 ) {
   const points = 5;
 
-  const outerCornerRoundness = 0.30;
-  const innerCornerRoundness = 0.42;
+  const outerCornerRoundness = 0.42;
+  const innerCornerRoundness = 0.32;
 
   const vertices = [];
 
