@@ -515,44 +515,57 @@ function containsProhibitedWishWord(message) {
 }
 
 
-day2Form.addEventListener(
-  "submit",
-  function (event) {
-    event.preventDefault();
+day2Form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const wishMessage =
-      wishMessageInput.value.trim();
+  const wishMessage = wishMessageInput.value.trim();
 
-    if (!wishMessage) {
-      return;
-    }
+  if (!wishMessage) {
+    wishValidationMessage.textContent =
+      "Please write a wish before creating your image.";
 
-    if (
-      containsProhibitedWishWord(wishMessage)
-    ) {
-      wishValidationMessage.textContent =
-        "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
+    wishValidationMessage.hidden = false;
 
-      wishValidationMessage.hidden = false;
-
-      return;
-    }
-
-    wishValidationMessage.textContent = "";
-    wishValidationMessage.hidden = true;
-
-    drawWishCard(wishMessage);
-
-    day2Form.closest("section").hidden = true;
-
-    wishCreationSection.hidden = false;
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    return;
   }
-);
+
+  const normalizedWish = wishMessage
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  const containsProhibitedWord = prohibitedWishWords.some(function (word) {
+    const normalizedWord = word
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    return normalizedWish.includes(normalizedWord);
+  });
+
+  if (containsProhibitedWord) {
+    wishValidationMessage.textContent =
+      "This wish cannot be generated because it contains inappropriate language. Please write a kind and respectful message for HAN.";
+
+    wishValidationMessage.hidden = false;
+
+    return;
+  }
+
+  wishValidationMessage.textContent = "";
+  wishValidationMessage.hidden = true;
+
+  drawWishCard(wishMessage);
+
+  day2Form.closest("section").hidden = true;
+
+  wishCreationSection.hidden = false;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
 
 
 downloadWishButton.addEventListener(
