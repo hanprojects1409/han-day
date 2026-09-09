@@ -134,8 +134,8 @@ function drawStarShape(
   const rotation = -Math.PI / 2;
 
   // ROUNDNESS 
-  const outerCornerRoundness = 0.30;
-  const innerCornerRoundness = 0.42;
+  const outerCornerRoundness = 0.38;
+  const innerCornerRoundness = 0.22;
 
   const vertices = [];
 
