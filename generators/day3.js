@@ -448,11 +448,7 @@ function drawPostcardCard(
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#3b3028";
-
   ctx.font = "500 64px Bodoni Moda, serif";
-
-  ctx.fillText(
-  ctx.font = "500 43px Bodoni Moda, serif";
 
 ctx.fillText(
   "STAY EVERYWHERE",
@@ -524,7 +520,7 @@ drawPostcardMessage(
   ctx.font = "500 24px Inter, sans-serif";
 
   ctx.fillText(
-  `With love, ${signature}`,
+  `with love, ${signature}`,
   600,
   1130
 );
