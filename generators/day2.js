@@ -60,22 +60,30 @@ function drawWishCard(wishMessage) {
   drawWishStar(ctx);
   drawTextInsideStar(ctx, wishMessage);
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
-  ctx.beginPath();
+  ctx.save();
+
+ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+ctx.beginPath();
+
+if (typeof ctx.roundRect === "function") {
   ctx.roundRect(65, 1360, 1070, 90, 45);
-  ctx.fill();
+} else {
+  ctx.rect(65, 1360, 1070, 90);
+}
 
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#f8e99b";
-  ctx.font = "500 27px Inter, sans-serif";
+ctx.fill();
 
-  ctx.fillText(
-    "#HAN_DAY  #HappyHANDay",
-    wishCanvas.width / 2,
-    1415
-  );
+ctx.textAlign = "center";
+ctx.fillStyle = "#f8e99b";
+ctx.font = "500 27px Inter, sans-serif";
 
-  ctx.textAlign = "left";
+ctx.fillText(
+  "#HAN_DAY  #HappyHANDay",
+  wishCanvas.width / 2,
+  1415
+);
+
+ctx.restore();
 }
 
 function drawWishStar(ctx) {
