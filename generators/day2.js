@@ -245,7 +245,7 @@ function drawTextInsideStar(ctx, wishMessage) {
     lines.length = 0;
     currentLine = "";
 
-    ctx.font = `${fontSize}px "Gveret Levin";
+    ctx.font = `${fontSize}px "Gveret Levin"`;
 
     words.forEach(function (word) {
       const testLine = currentLine
@@ -285,7 +285,7 @@ function drawTextInsideStar(ctx, wishMessage) {
   ctx.fillStyle = "#4a3b2e";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `${fontSize}px "Gveret Levin";
+  ctx.font = `${fontSize}px "Gveret Levin"`;
 
   const lineHeight = fontSize * 1.2;
   const startY =
