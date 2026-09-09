@@ -322,29 +322,43 @@
       .creation-actions button {
         width: 100%;
       }
-    }
 
-    /* DAY 2 */
+      /* =========================
+   DAY 2 CSS
+========================= */
 
-.day-section {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 90px 24px;
+.day2-intro-heading {
+  padding-top: 55px;
+  padding-bottom: 45px;
+}
+
+.day2-intro-heading h1 {
+  max-width: 700px;
+}
+
+.day2-intro-heading p {
+  max-width: 430px;
+  margin-top: 30px;
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.day2-intro-heading + .day2-card {
+  margin-top: 0;
 }
 
 .day2-card {
+  width: 100%;
   max-width: 620px;
-  margin: 42px auto 0;
+  margin: 0 auto 80px;
   padding: 42px;
   background: #ffffff;
-  border: 1px solid #e8e2c7;
-  border-radius: 28px;
-  box-shadow: 0 18px 45px rgba(59, 48, 40, 0.06);
+  border: 1px solid rgba(59, 48, 40, 0.12);
+  border-radius: 4px;
 }
 
 .day2-intro {
-  text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 35px;
 }
 
 .day2-symbol {
@@ -357,17 +371,17 @@
 
 .day2-intro h3 {
   margin: 0 0 12px;
-  color: #3b3028;
   font-family: "Bodoni Moda", serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 500;
-  line-height: 1.2;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .day2-intro p {
   max-width: 390px;
-  margin: 0 auto;
-  color: #686868;
+  margin: 0;
+  color: var(--gray);
   font-size: 14px;
   line-height: 1.7;
 }
@@ -386,164 +400,72 @@
 
 .day-form label {
   color: #3b3028;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.day-form textarea {
-  min-height: 145px;
-  resize: vertical;
-  padding: 18px;
-  border: 1px solid #dcd3b8;
-  border-radius: 16px;
-  background: #fffdf5;
-  color: #3b3028;
-  font-family: Inter, sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  outline: none;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-.day-form textarea::placeholder {
-  color: #a19a8d;
-}
-
-.day-form textarea:focus {
-  border-color: #c9a83d;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(248, 233, 155, 0.35);
-}
-
-.day-form small {
-  color: #919191;
   font-size: 12px;
-}
-
-.day-form .content-warning {
-  margin: 0;
-}
-
-.day-form .primary-button {
-  width: 100%;
-  margin-top: 4px;
-}
-
-#wish-creation-section {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 70px 24px 90px;
-}
-
-#wish-creation-section h2 {
-  margin-bottom: 30px;
-  text-align: center;
-  color: #3b3028;
-  font-family: "Bodoni Moda", serif;
-  font-size: 38px;
-  font-weight: 500;
-}
-
-#wish-creation-section .canvas-wrapper {
-  max-width: 560px;
-  margin: 0 auto;
-  padding: 14px;
-  background: #ffffff;
-  border: 1px solid #e8e2c7;
-  border-radius: 24px;
-  box-shadow: 0 18px 45px rgba(59, 48, 40, 0.08);
-}
-
-#wish-creation-section canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-}
-
-#wish-creation-section .creation-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 26px;
-}
-
-#wish-creation-section .hashtags {
-  max-width: 560px;
-  margin: 26px auto 0;
-  padding: 20px;
-  border: 1px solid #e8e2c7;
-  border-radius: 18px;
-  background: #fffdf5;
-  color: #686868;
-  text-align: center;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-#wish-creation-section .hashtags strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #3b3028;
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-#wish-copy-status {
-  display: block;
-  min-height: 20px;
-  margin-top: 6px;
-  color: #b08b25;
-  font-size: 12px;
-  font-weight: 600;
+.day-form textarea {
+  width: 100%;
+  min-height: 150px;
+  resize: vertical;
+  padding: 17px;
+  border: 1px solid #d8d1c8;
+  border-radius: 0;
+  outline: none;
+  background: #fffdf8;
+  color: #3b3028;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  transition: border-color 0.2s ease;
 }
 
-@media (max-width: 600px) {
-  .day-section {
-    padding: 60px 18px;
+.day-form textarea:focus {
+  border-color: #3b3028;
+}
+
+.day-form textarea::placeholder {
+  color: #a49b91;
+}
+
+.day-form small {
+  color: var(--gray);
+  font-size: 11px;
+}
+
+.validation-message {
+  margin: -8px 0 0;
+  color: #b50b00;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .day2-intro-heading {
+    padding-top: 35px;
+    padding-bottom: 30px;
   }
 
   .day2-card {
-    margin-top: 30px;
-    padding: 28px 20px;
-    border-radius: 22px;
+    padding: 28px 22px;
+    margin-bottom: 55px;
   }
 
   .day2-intro h3 {
-    font-size: 28px;
+    font-size: 26px;
   }
 
-  #wish-creation-section {
-    padding: 50px 18px 70px;
-  }
-
-  #wish-creation-section h2 {
-    font-size: 32px;
-  }
-
-  #wish-creation-section .canvas-wrapper {
-    padding: 8px;
-    border-radius: 18px;
-  }
-
-  #wish-creation-section .creation-actions {
-    flex-direction: column;
-  }
-
-  #wish-creation-section .creation-actions button {
-    width: 100%;
+  .day2-symbol {
+    font-size: 26px;
   }
 }
+    }
   </style>
 </head>
-
 <body>
+    
   <main class="page">
     <div class="container">
 
@@ -654,17 +576,23 @@
         </div>
       </section>
 
-<section class="intro day2-intro-heading">
-  <div class="eyebrow">A birthday wish written for HAN</div>
+<section id="day2-section" class="day-section">
 
-  <h1>Make a Wish<br>for HAN</h1>
+  <section class="intro day2-intro-heading">
+    <div class="eyebrow">A birthday wish written for HAN</div>
 
-  <p>
-    Write a wish for HAN and send it into the stars.
-  </p>
-</section>
+    <h1>
+      Make a Wish<br />
+      for HAN
+    </h1>
+
+    <p>
+      Write a wish for HAN and send it into the stars.
+    </p>
+  </section>
 
   <div class="day2-card">
+
     <div class="day2-intro">
       <span class="day2-symbol">✦</span>
 
@@ -676,9 +604,13 @@
       </p>
     </div>
 
+
     <form id="day2-form" class="day-form">
+
       <div class="field">
-        <label for="wish-message">Your wish</label>
+        <label for="wish-message">
+          Your wish
+        </label>
 
         <textarea
           id="wish-message"
@@ -687,38 +619,58 @@
           required
         ></textarea>
 
-        <small>80 characters maximum</small>
+        <small>
+          80 characters maximum
+        </small>
       </div>
 
+
       <div class="content-warning">
-        <strong>Please keep your wish respectful.</strong>
+        <strong>
+          Please keep your wish respectful.
+        </strong>
 
         <p>
-          Write something kind, positive and appropriate for HAN. <br> Every wish should be made with love and respect.
+          Write something kind, positive and appropriate for HAN.
+          Every wish should be made with love and respect.
         </p>
       </div>
 
+
       <p
-  id="wish-validation-message"
-  class="validation-message"
-  hidden
-></p>
-      
-      <button type="submit" class="primary-button">
+        id="wish-validation-message"
+        class="validation-message"
+        hidden
+      ></p>
+
+
+      <button
+        type="submit"
+        class="primary-button"
+      >
         Create my wish
       </button>
+
     </form>
   </div>
+
 </section>
 
-      <section class="creation" id="wish-creation-section" hidden>
+<section
+  class="creation"
+  id="wish-creation-section"
+  hidden
+>
+
   <h2>Your wish</h2>
 
   <div class="canvas-wrapper">
     <canvas id="wish-canvas"></canvas>
   </div>
 
+
   <div class="creation-actions">
+
     <button
       class="primary-button"
       id="download-wish"
@@ -742,14 +694,23 @@
     >
       Back
     </button>
+
   </div>
 
+
   <div class="hashtags">
-    <strong>Hashtags for your post</strong>
-    #HAN_DAY #HappyHANDay
+    <strong>
+      Hashtags for your post
+    </strong>
+
+    <p>
+      #HAN_DAY #HappyHANDay
+    </p>
+
     <span id="wish-copy-status"></span>
   </div>
-      </section>
+
+</section>
       
       <footer>
         HAN GLOBAL · Made with love for HAN
