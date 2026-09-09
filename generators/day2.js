@@ -1,6 +1,5 @@
 const day2Form = document.querySelector("#day2-form");
 const wishMessageInput = document.querySelector("#wish-message");
-const wishDesignSelect = document.querySelector("#wish-design");
 
 const wishCreationSection = document.querySelector(
   "#wish-creation-section"
@@ -23,7 +22,7 @@ const wishHashtags = [
   "#HappyHANDay"
 ];
 
-function drawWishCard(wishMessage, wishDesign) {
+function drawWishCard(wishMessage) {
   wishCanvas.width = 1200;
   wishCanvas.height = 1500;
 
@@ -60,21 +59,22 @@ ctx.fillRect(0, 0, wishCanvas.width, wishCanvas.height);
   ctx.font = "500 82px 'Bodoni Moda', serif";
   ctx.fillText("MAKE A", 90, 280);
   ctx.fillText("WISH FOR HAN", 90, 380);
+}
 
-  if (isShooting) {
-    drawShootingStar(ctx);
-  } else {
-    drawWishStar(ctx, isShining);
-    drawTextInsideStar(ctx, wishMessage);
-  }
+  ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+ctx.beginPath();
+ctx.roundRect(65, 1360, 1070, 90, 45);
+ctx.fill();
 
-  if (isShooting) {
-    drawTextBelowStar(ctx, wishMessage);
-  }
+ctx.textAlign = "center";
+ctx.fillStyle = "#f8e99b";
+ctx.font = "500 27px Inter, sans-serif";
 
-  ctx.textAlign = "left";
-  ctx.font = "400 26px Inter, sans-serif";
-  ctx.fillText("#HAN_DAY  #HappyHANDay", 90, 1410);
+ctx.fillText(
+  "#HAN_DAY  #HappyHANDay",
+  wishCanvas.width / 2,
+  1415
+);
 }
 
 function drawWishStar(ctx, isShining) {
@@ -192,7 +192,7 @@ function drawTextInsideStar(ctx, wishMessage) {
   const lines = [];
   let currentLine = "";
 
-  ctx.font = "400 48px Parisienne, cursive";
+  ctx.font = `${fontSize}px "Gveret Levin", cursive`;
 
   words.forEach(function (word) {
     const testLine = `${currentLine} ${word}`.trim();
@@ -483,9 +483,8 @@ day2Form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const wishMessage = wishMessageInput.value.trim();
-  const wishDesign = wishDesignSelect.value;
 
-  drawWishCard(wishMessage, wishDesign);
+  drawWishCard(wishMessage);
 
   day2Form.closest("section").hidden = true;
   wishCreationSection.hidden = false;
