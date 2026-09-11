@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HAN DAY | A postcard to HAN</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Inter:wght@400;500;600;700&family=Gveret+Levin&display=swap"
+  rel="stylesheet"
+/>
+
+  <style>
+    :root {
+      --yellow: #f8e99b;
+      --yellow-light: #fff9d9;
+      --yellow-soft: #fdf4bd;
+      --black: #111111;
+      --gray: #686868;
+      --white: #ffffff;
+      --border: #e8e2c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--yellow-light);
+      color: var(--black);
+      font-family: "Inter", sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 8px 0 45px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .topbar span {
+      color: var(--gray);
+      text-align: right;
+    }
+
+    .intro {
+      padding: 55px 0 45px;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 700px;
+      font-family: "Bodoni Moda", serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.07em;
+      line-height: 1.15;
+    }
+
+    .intro p {
+      max-width: 430px;
+      margin-top: 30px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--white);
+      padding: 30px;
+    }
+
+    .field {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      background: var(--yellow-light);
+      color: var(--black);
+      outline: none;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--black);
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: 1px solid var(--black);
+      padding: 13px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .primary-button {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .primary-button:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .secondary-button {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .secondary-button:hover {
+      background: var(--yellow-soft);
+    }
+
+    .creation {
+      margin-top: 35px;
+    }
+
+    .creation h2 {
+      margin-bottom: 20px;
+      font-family: "Bodoni Moda", serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      letter-spacing: -0.05em;
+    }
+
+    .canvas-wrapper {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--yellow-light);
+      padding: 12px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .creation-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hashtags {
+      margin-top: 25px;
+      padding: 18px;
+      background: var(--yellow-light);
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .hashtags strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--black);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    #copy-status {
+      display: block;
+      margin-top: 8px;
+      color: var(--black);
+      font-size: 12px;
+    }
+
+    footer {
+      margin-top: 70px;
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .field-hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--gray);
+  font-size: 11px;
+}
+
+.content-warning {
+  margin-bottom: 25px;
+  border-left: 3px solid var(--black);
+  background: var(--yellow-light);
+  padding: 16px 18px;
+}
+
+.content-warning strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.content-warning p {
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+    .validation-message {
+  margin-top: 18px;
+  border-left: 3px solid var(--black);
+  background: #fff1b8;
+  padding: 14px 16px;
+  color: var(--black);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.validation-message strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+    
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .topbar span {
+        text-align: left;
+      }
+
+      .intro {
+        padding-top: 35px;
+      }
+
+      .panel {
+        padding: 22px;
+      }
+
+      .creation-actions {
+        flex-direction: column;
+      }
+
+      .creation-actions button {
+        width: 100%;
+      }
+    }
+      /* =========================
+   DAY 2 CSS
+========================= */
+
+.day2-intro-heading {
+  padding-top: 55px;
+  padding-bottom: 45px;
+}
+
+.day2-intro-heading h1 {
+  max-width: 700px;
+  line-height: 1.15;
+}
+
+.day2-intro-heading p {
+  max-width: 430px;
+  margin-top: 30px;
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.day2-intro-heading + .day2-card {
+  margin-top: 0;
+}
+
+.day2-card {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 80px;
+  padding: 42px;
+  border: 1px solid #e8e2c7;
+  background: #ffffff;
+  color: var(--black);
+  border-radius: 6px;
+  box-shadow: 0 18px 45px rgba(59, 48, 40, 0.08);
+}
+
+.day2-intro {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.day2-symbol {
+  display: block;
+  margin-bottom: 16px;
+  color: #d7b84d;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.day2-intro h3 {
+  margin: 0 0 12px;
+  font-family: "Bodoni Moda", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.day2-intro p {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.day-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.day-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.day-form label {
+  color: #3b3028;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.day-form textarea {
+  width: 100%;
+  min-height: 150px;
+  resize: vertical;
+  padding: 17px;
+  border: 1px solid #d8d1c8;
+  border-radius: 0;
+  outline: none;
+  background: #fffdf8;
+  color: #3b3028;
+      .creation-actions button {
+        width: 100%;
+      }
+    }
+
+    /* =========================
+       DAY 2 CSS HEADING
+    ========================= */
+
+    .day2-intro-heading {
+      padding-top: 55px;
+      padding-bottom: 45px;
+    }
+
+    .day2-intro-heading h1 {
+      max-width: 700px;
+    }
+
+    .day2-intro-heading p {
+      max-width: 430px;
+      margin-top: 30px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .day2-intro-heading + .day2-card {
+      margin-top: 0;
+    }
+
+    .day2-card {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto 80px;
+      padding: 42px;
+      border: 1px solid #e8e2c7;
+      background: #ffffff;
+      color: var(--black);
+      border-radius: 6px;
+      box-shadow: 0 18px 45px rgba(59, 48, 40, 0.08);
+    }
+
+    .day2-intro {
+      margin-bottom: 35px;
+      text-align: center;
+    }
+
+    .day2-symbol {
+      display: block;
+      margin-bottom: 16px;
+      color: #d7b84d;
+      font-size: 30px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .day2-intro h3 {
+      margin: 0 0 12px;
+      font-family: "Bodoni Moda", serif;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .day2-intro p {
+      max-width: 390px;
+      margin: 0 auto;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .day-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .day-form .field {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 0;
+    }
+
+    .day-form label {
+      color: #3b3028;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .day-form textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 17px;
+      border: 1px solid #d8d1c8;
+      border-radius: 0;
+      outline: none;
+      background: #fffdf8;
+      color: #3b3028;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      transition: border-color 0.2s ease;
+    }
+
+    .day-form textarea:focus {
+      border-color: #3b3028;
+    }
+
+    .day-form textarea::placeholder {
+      color: #a49b91;
+    }
+
+    .day-form small {
+      color: var(--gray);
+      font-size: 11px;
+    }
+
+    .validation-message {
+      margin: -8px 0 0;
+      color: #b50b00;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .day2-intro-heading {
+        padding-top: 35px;
+        padding-bottom: 30px;
+      }
+
+      .day2-card {
+        padding: 28px 22px;
+        margin-bottom: 55px;
+      }
+
+      .day2-intro h3 {
+        font-size: 26px;
+      }
+
+      .day2-symbol {
+        font-size: 26px;
+      }
+    }
+
+    /* =========================
+   DAY 3 CSS
+========================= */
+
+    .day3-intro {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.day3-intro h3 {
+  margin: 0 0 12px;
+  font-family: "Bodoni Moda", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.day3-intro p {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+    .day3-card {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 80px;
+  padding: 42px;
+  border: 1px solid #e8e2c7;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--black);
+  box-shadow: 0 18px 45px rgba(59, 48, 40, 0.08);
+    }
+    
+.day3-card select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid #d8d1c8;
+  border-radius: 0;
+  outline: none;
+  background: #fffdf8;
+  color: #3b3028;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.day3-card select:focus {
+  border-color: #3b3028;
+}
+
+@media (max-width: 700px) {
+  .day3-intro h3 {
+    font-size: 26px;
+  }
+  
+  .day3-card {
+    padding: 28px 22px;
+    margin-bottom: 55px;
+  }
+    }
+  }
+    
+/* =========================
+   HAN DAY MAIN MENU
+========================= */
+
+.han-day-menu {
+  padding: 20px 0 75px;
+}
+
+.menu-intro {
+  position: relative;
+  padding: 35px 0 70px;
+}
+
+.menu-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 95px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+
+  color: var(--gray);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.menu-intro .eyebrow {
+  margin-bottom: 20px;
+  color: var(--gray);
+}
+
+.menu-intro h1 {
+  max-width: none;
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(4.5rem, 15vw, 9rem);
+  font-weight: 500;
+  letter-spacing: -0.085em;
+  line-height: 0.88;
+}
+
+.menu-description {
+  max-width: 390px;
+  margin-top: 35px;
+  color: var(--gray);
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.menu-divider {
+  width: 100%;
+  height: 1px;
+  margin: 65px 0 28px;
+  background: var(--border);
+}
+
+.menu-introduction {
+  max-width: 500px;
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.menu-introduction strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--black);
+  font-family: "Bodoni Moda", serif;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+
+.activity-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 5px;
+}
+
+.activity-card {
+  min-height: 410px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 27px;
+
+  border: 1px solid var(--border);
+  background: var(--white);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 45px rgba(59, 48, 40, 0.07);
+}
+
+    .activity-card.activity-available {
+  cursor: pointer;
+}
+
+.activity-card.activity-available .activity-status {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
+.activity-card.activity-available:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(59, 48, 40, 0.09);
+}
+
+.activity-number {
+  color: var(--gray);
+  font-family: "Bodoni Moda", serif;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+
+.activity-content {
+  padding: 45px 0;
+}
+
+.activity-label {
+  margin-bottom: 17px;
+
+  color: var(--gray);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.activity-content h2 {
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+}
+
+.activity-content p {
+  max-width: 260px;
+  margin-top: 20px;
+
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.activity-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.activity-counter {
+  color: var(--black);
+  font-family: "Bodoni Moda", serif;
+  font-size: 16px;
+}
+
+.activity-status {
+  width: fit-content;
+
+  padding: 5px 8px;
+
+  border: 1px solid var(--border);
+  background: var(--yellow-light);
+
+  color: var(--gray);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+@media (max-width: 700px) {
+
+  .han-day-menu {
+    padding-top: 5px;
+    padding-bottom: 50px;
+  }
+
+  .menu-intro {
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+
+  .menu-meta {
+    margin-bottom: 65px;
+  }
+
+  .menu-intro h1 {
+    font-size: clamp(4rem, 21vw, 6.5rem);
+  }
+
+  .menu-description {
+    margin-top: 28px;
+  }
+
+  .menu-divider {
+    margin: 50px 0 25px;
+  }
+
+  .activity-menu {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .activity-card {
+    min-height: 350px;
+    padding: 24px;
+  }
+
+  .activity-content {
+    padding: 35px 0;
+  }
+}
+    .menu-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 35px;
+  padding-top: 18px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--gray);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+
+  .menu-footer {
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+  </style>
+</head>
+<body>
+    
+  <main class="page">
+    <div class="container">
+
+      <div class="menu-footer">
+
+             
+      <header class="topbar">
+        <div>HAN GLOBAL</div>
+        <span>HAN DAY · DAY 03</span>
+      </header>
+
+   <section id="day3-section" class="day-section">
+
+  <section class="intro day3-intro-heading">
+    <div class="eyebrow">A message from STAY around the world</div>
+
+    <h1>
+      A postcard<br />
+      to HAN
+    </h1>
+
+    <p>
+      Send HAN a little message from your corner of the world.
+    </p>
+  </section>
+
+  <div class="day3-card">
+
+    <div class="day3-intro">
+      <h3>A little postcard for HAN</h3>
+
+      <p>
+        Tell HAN where your message is coming from.
+      </p>
+    </div>
+
+    <form id="day3-form" class="day-form">
+
+      <div class="field">
+  <label for="postcard-country">
+    Your country
+  </label>
+
+  <select id="postcard-country" required>
+    <option value="" selected disabled>
+      Select your country...
+    </option>
+
+    <option value="Mexico" data-flag="🇲🇽">
+      Mexico
+    </option>
+
+    <option value="United States" data-flag="🇺🇸">
+      United States
+    </option>
+
+    <option value="Canada" data-flag="🇨🇦">
+      Canada
+    </option>
+
+    <option value="Brazil" data-flag="🇧🇷">
+      Brazil
+    </option>
+
+    <option value="Argentina" data-flag="🇦🇷">
+      Argentina
+    </option>
+
+    <option value="Chile" data-flag="🇨🇱">
+      Chile
+    </option>
+
+    <option value="Colombia" data-flag="🇨🇴">
+      Colombia
+    </option>
+
+    <option value="Peru" data-flag="🇵🇪">
+      Peru
+    </option>
+
+    <option value="Spain" data-flag="🇪🇸">
+      Spain
+    </option>
+
+    <option value="United Kingdom" data-flag="🇬🇧">
+      United Kingdom
+    </option>
+
+    <option value="France" data-flag="🇫🇷">
+      France
+    </option>
+
+    <option value="Italy" data-flag="🇮🇹">
+      Italy
+    </option>
+
+    <option value="Germany" data-flag="🇩🇪">
+      Germany
+    </option>
+
+    <option value="Australia" data-flag="🇦🇺">
+      Australia
+    </option>
+
+    <option value="New Zealand" data-flag="🇳🇿">
+      New Zealand
+    </option>
+
+    <option value="Japan" data-flag="🇯🇵">
+      Japan
+    </option>
+
+    <option value="South Korea" data-flag="🇰🇷">
+      South Korea
+    </option>
+
+    <option value="China" data-flag="🇨🇳">
+      China
+    </option>
+
+    <option value="Philippines" data-flag="🇵🇭">
+      Philippines
+    </option>
+
+    <option value="Thailand" data-flag="🇹🇭">
+      Thailand
+    </option>
+
+    <option value="Indonesia" data-flag="🇮🇩">
+      Indonesia
+    </option>
+
+    <option value="Malaysia" data-flag="🇲🇾">
+      Malaysia
+    </option>
+
+    <option value="Singapore" data-flag="🇸🇬">
+      Singapore
+    </option>
+
+    <option value="India" data-flag="🇮🇳">
+      India
+    </option>
+
+    <option value="Turkey" data-flag="🇹🇷">
+      Turkey
+    </option>
+
+    <option value="Other" data-flag="🌍">
+      Other
+    </option>
+  </select>
+      </div>
+
+      <div class="field">
+        <label for="postcard-message">
+          Your message
+        </label>
+
+        <textarea
+          id="postcard-message"
+          maxlength="100"
+          placeholder="Write a message for HAN..."
+          required
+        ></textarea>
+
+        <small>
+          100 characters maximum
+        </small>
+      </div>
+
+      <div class="content-warning">
+        <strong>
+          Please keep your message respectful.
+        </strong>
+
+        <p>
+          Write something kind, positive and appropriate for HAN.
+          Every message should be made with love and respect.
+        </p>
+      </div>
+
+      <p
+        id="postcard-validation-message"
+        class="validation-message"
+        hidden
+      ></p>
+
+      <div class="field">
+  <label for="postcard-signature">
+    Your name or nickname
+  </label>
+
+  <input
+    type="text"
+    id="postcard-signature"
+    maxlength="30"
+    placeholder="Write your name or nickname..."
+    required
+  />
+
+  <small>
+    Use only a name or nickname. For your safety, do not include
+    personal information such as your address, phone number,
+    email or private social media accounts.
+  </small>
+      </div>
+      
+      <button
+        type="submit"
+        class="primary-button"
+      >
+        Create my postcard
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+<section
+  class="creation"
+  id="postcard-creation-section"
+  hidden
+>
+
+  <h2>Your postcard</h2>
+
+  <div class="canvas-wrapper">
+    <canvas id="postcard-canvas"></canvas>
+  </div>
+
+  <div class="creation-actions">
+
+    <button
+      class="primary-button"
+      id="download-postcard"
+      type="button"
+    >
+      Download
+    </button>
+
+    <button
+      class="secondary-button"
+      id="copy-postcard-hashtags"
+      type="button"
+    >
+      Copy hashtags
+    </button>
+
+    <button
+      class="secondary-button"
+      id="back-to-postcard-form"
+      type="button"
+    >
+      Back
+    </button>
+
+  </div>
+
+  <div class="hashtags">
+    <strong>
+      Hashtags for your post
+    </strong>
+
+    <p>
+      #HAN_DAY #HappyHANDay
+    </p>
+
+    <span id="postcard-copy-status"></span>
+  </div>
+
+</section>
+
+      
+      <footer>
+        HAN GLOBAL · Made with love for HAN
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="generators/day3.js"></script>
+
+  
+</body>
+</html>
