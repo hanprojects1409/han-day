@@ -668,7 +668,7 @@ day2Form.addEventListener("submit", async function (event) {
   wishValidationMessage.textContent = "";
   wishValidationMessage.hidden = true;
 
-  await registerSongParticipation();
+  await registerWishParticipation();
   
   drawWishCard(wishMessage);
 
