@@ -164,6 +164,29 @@ const hashtags = [
   "#HappyHANDay"
 ];
 
+async function registerSongParticipation() {
+  try {
+    const response = await fetch("/api/counter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        activity: "songs"
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Counter request failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Could not register song participation:", error);
+    return false;
+  }
+}
+
 function drawSongCard() {
   const songTitle = songTitleInput.value.trim();
   const artistName = artistNameInput.value.trim();
@@ -239,7 +262,7 @@ function drawSongCard() {
   canvasContext.fillText("HAN DAY · HAN GLOBAL", 90, 1430);
 }
 
-day1Form.addEventListener("submit", function (event) {
+day1Form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const songTitle = songTitleInput.value.trim();
@@ -262,6 +285,8 @@ day1Form.addEventListener("submit", function (event) {
 validationMessage.hidden = true;
 validationMessage.textContent = "";
 
+  await registerSongParticipation();
+  
   drawSongCard();
 
   document.querySelector("#form-section").hidden = true;
