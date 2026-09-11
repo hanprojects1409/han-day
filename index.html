@@ -746,6 +746,21 @@
   box-shadow: 0 20px 45px rgba(59, 48, 40, 0.07);
 }
 
+    .activity-card.activity-available {
+  cursor: pointer;
+}
+
+.activity-card.activity-available .activity-status {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
+.activity-card.activity-available:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(59, 48, 40, 0.09);
+}
+
 .activity-number {
   color: var(--gray);
   font-family: "Bodoni Moda", serif;
@@ -1552,5 +1567,48 @@
 
   loadGlobalCounters();
   </script>
+
+  <script>
+  function updateActivityAvailability() {
+    // OPENINGS: MX
+    const schedule = {
+      1: new Date("2026-09-12T08:00:00-06:00"),
+      2: new Date("2026-09-13T08:00:00-06:00"),
+      3: new Date("2026-09-14T08:00:00-06:00")
+    };
+
+    const now = new Date();
+
+    for (let day = 1; day <= 3; day++) {
+      const card = document.querySelector(
+        `.activity-card[data-day="${day}"]`
+      );
+
+      const status = document.getElementById(
+        `day${day}-status`
+      );
+
+      if (!card || !status) continue;
+
+      if (now >= schedule[day]) {
+        status.textContent = "START";
+        card.classList.add("activity-available");
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+      } else {
+        status.textContent = "COMING SOON";
+        card.classList.remove("activity-available");
+        card.removeAttribute("role");
+        card.removeAttribute("tabindex");
+      }
+    }
+  }
+
+  updateActivityAvailability();
+
+  setInterval(updateActivityAvailability, 60000);
+  </script>
+
+  
 </body>
 </html>
