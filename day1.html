@@ -898,7 +898,42 @@
   </style>
 </head>
 <body>
-    
+
+  <script>
+  const day1Opening = new Date("2026-09-12T08:00:00-06:00");
+
+  if (new Date() < day1Opening) {
+    document.body.innerHTML = `
+      <main class="page">
+        <div class="container">
+          <header class="topbar">
+            <div>HAN GLOBAL</div>
+            <span>HAN DAY · DAY 01</span>
+          </header>
+
+          <section class="intro">
+            <div class="eyebrow">A DIGITAL BIRTHDAY PROJECT</div>
+
+            <h1>Coming<br>soon.</h1>
+
+            <p>
+              This activity will open on September 12, 2026
+              at 11:00 PM KST.
+            </p>
+          </section>
+
+          <footer>
+            HAN GLOBAL · Made with love for HAN
+          </footer>
+        </div>
+      </main>
+    `;
+
+    throw new Error("Day 1 is not open yet.");
+  }
+  </script>
+
+  
   <main class="page">
     <div class="container">
    
