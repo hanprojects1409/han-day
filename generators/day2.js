@@ -725,6 +725,7 @@ copyWishHashtagsButton.addEventListener(
 );
 
 
+
 backToWishFormButton.addEventListener(
   "click",
   function () {
