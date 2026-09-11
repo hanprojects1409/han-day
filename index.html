@@ -640,6 +640,146 @@
   }
     }
   }
+    /* =========================
+   HAN DAY MAIN MENU
+========================= */
+
+.han-day-menu {
+  padding: 55px 0 30px;
+}
+
+.menu-intro {
+  max-width: 720px;
+  margin-bottom: 65px;
+}
+
+.menu-intro .eyebrow {
+  margin-bottom: 22px;
+}
+
+.menu-intro h1 {
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 0.95;
+}
+
+.menu-intro p {
+  max-width: 430px;
+  margin-top: 30px;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.activity-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.activity-card {
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 28px;
+
+  border: 1px solid var(--border);
+  background: var(--white);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(59, 48, 40, 0.08);
+}
+
+.activity-number {
+  color: var(--gray);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.activity-label {
+  margin-bottom: 18px;
+  color: var(--gray);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.activity-content h2 {
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.activity-content p {
+  max-width: 280px;
+  margin-top: 22px;
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.activity-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border);
+}
+
+.activity-counter {
+  color: var(--black);
+  font-family: "Bodoni Moda", serif;
+  font-size: 17px;
+}
+
+.activity-status {
+  width: fit-content;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  background: var(--yellow-light);
+  color: var(--gray);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 700px) {
+
+  .han-day-menu {
+    padding-top: 35px;
+  }
+
+  .menu-intro {
+    margin-bottom: 45px;
+  }
+
+  .menu-intro h1 {
+    font-size: clamp(3.5rem, 20vw, 6rem);
+  }
+
+  .activity-menu {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .activity-card {
+    min-height: 330px;
+  }
+
+}
 }
   </style>
 </head>
@@ -648,6 +788,103 @@
   <main class="page">
     <div class="container">
 
+      <!-- HAN DAY MAIN MENU -->
+<section id="han-day-menu" class="han-day-menu">
+
+  <div class="menu-intro">
+    <div class="eyebrow">A birthday celebration for HAN</div>
+
+    <h1>HAN DAY</h1>
+
+    <p>
+      Three little ways to celebrate HAN,
+      created by STAY around the world.
+    </p>
+  </div>
+
+  <div class="activity-menu">
+
+    <article class="activity-card" data-day="1">
+      <div class="activity-number">01</div>
+
+      <div class="activity-content">
+        <div class="activity-label">DAY 01</div>
+
+        <h2>A song<br>for HAN</h2>
+
+        <p>
+          Choose a song that reminds you of HAN
+          and create a personal birthday card.
+        </p>
+      </div>
+
+      <div class="activity-footer">
+        <span class="activity-counter" id="menu-songs-counter">
+          0 songs for HAN
+        </span>
+
+        <span class="activity-status" id="day1-status">
+          COMING SOON
+        </span>
+      </div>
+    </article>
+
+
+    <article class="activity-card" data-day="2">
+      <div class="activity-number">02</div>
+
+      <div class="activity-content">
+        <div class="activity-label">DAY 02</div>
+
+        <h2>Make a wish<br>for HAN</h2>
+
+        <p>
+          Write a little wish for HAN
+          and send it into the stars.
+        </p>
+      </div>
+
+      <div class="activity-footer">
+        <span class="activity-counter" id="menu-stars-counter">
+          0 stars for HAN
+        </span>
+
+        <span class="activity-status" id="day2-status">
+          COMING SOON
+        </span>
+      </div>
+    </article>
+
+
+    <article class="activity-card" data-day="3">
+      <div class="activity-number">03</div>
+
+      <div class="activity-content">
+        <div class="activity-label">DAY 03</div>
+
+        <h2>A postcard<br>to HAN</h2>
+
+        <p>
+          Send HAN a little message
+          from your corner of the world.
+        </p>
+      </div>
+
+      <div class="activity-footer">
+        <span class="activity-counter" id="menu-postcards-counter">
+          0 postcards for HAN
+        </span>
+
+        <span class="activity-status" id="day3-status">
+          COMING SOON
+        </span>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+      
       <header class="topbar">
         <div>HAN GLOBAL</div>
         <span>HAN DAY · DAY 01</span>
