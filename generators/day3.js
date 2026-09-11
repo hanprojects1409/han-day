@@ -45,6 +45,33 @@ const postcardHashtags = [
   "#HappyHANDay"
 ];
 
+async function registerPostcardParticipation() {
+  try {
+    const response = await fetch("/api/counter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        activity: "postcards"
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Counter request failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error(
+      "Could not register postcard participation:",
+      error
+    );
+
+    return false;
+  }
+}
+
 const prohibitedPostcardWords = [
   "puto",
   "puta",
@@ -557,7 +584,7 @@ drawPostcardMessage(
 
 day3Form.addEventListener(
   "submit",
-  function (event) {
+  async function (event) {
     event.preventDefault();
 
     const countryOption =
@@ -621,6 +648,8 @@ if (containsProhibitedPostcardWord(postcardSignature)) {
     postcardValidationMessage.textContent = "";
     postcardValidationMessage.hidden = true;
 
+    await registerPostcardParticipation();
+    
     drawPostcardCard(
       countryName,
       countryFlag,
