@@ -36,6 +36,33 @@ const wishHashtags = [
   "#HappyHANDay"
 ];
 
+async function registerWishParticipation() {
+  try {
+    const response = await fetch("/api/counter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        activity: "stars"
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Counter request failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error(
+      "Could not register wish participation:",
+      error
+    );
+
+    return false;
+  }
+}
+
 const prohibitedWishWords = [
   "puto",
   "puta",
@@ -615,7 +642,7 @@ function containsProhibitedWishWord(message) {
 }
 
 
-day2Form.addEventListener("submit", function (event) {
+day2Form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const wishMessage = wishMessageInput.value.trim();
@@ -641,6 +668,8 @@ day2Form.addEventListener("submit", function (event) {
   wishValidationMessage.textContent = "";
   wishValidationMessage.hidden = true;
 
+  await registerSongParticipation();
+  
   drawWishCard(wishMessage);
 
   day2Form.closest("section").hidden = true;
