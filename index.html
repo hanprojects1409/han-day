@@ -1524,5 +1524,33 @@
   <script src="generators/day1.js"></script>
   <script src="generators/day2.js"></script>
   <script src="generators/day3.js"></script>
+
+  <script>
+  async function loadGlobalCounters() {
+    try {
+      const response = await fetch("/api/counter");
+
+      if (!response.ok) {
+        throw new Error("Could not load counters");
+      }
+
+      const counters = await response.json();
+
+      document.getElementById("menu-songs-counter").textContent =
+        `${counters.songs} songs for HAN`;
+
+      document.getElementById("menu-stars-counter").textContent =
+        `${counters.stars} stars for HAN`;
+
+      document.getElementById("menu-postcards-counter").textContent =
+        `${counters.postcards} postcards for HAN`;
+
+    } catch (error) {
+      console.error("Could not load global counters:", error);
+    }
+  }
+
+  loadGlobalCounters();
+  </script>
 </body>
 </html>
