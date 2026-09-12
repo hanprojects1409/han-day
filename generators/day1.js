@@ -310,7 +310,6 @@ validationMessage.textContent = "";
 });
 
 downloadSongButton.addEventListener("click", function () {
-downloadSongButton.addEventListener("click", function () {
   songCanvas.toBlob(function (blob) {
     if (!blob) {
       alert("The card could not be created. Please try again.");
