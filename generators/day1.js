@@ -135,6 +135,7 @@ const blockedWords = [
   "jump",
 "dive",
   "performative",
+  "admin",
   "zionist",
   "zionismm",
  "israel",
