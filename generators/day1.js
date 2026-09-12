@@ -310,32 +310,29 @@ validationMessage.textContent = "";
 });
 
 downloadSongButton.addEventListener("click", function () {
-  try {
-    songCanvas.toBlob(function (blob) {
-      if (!blob) {
-        throw new Error("Could not create image file.");
-      }
+downloadSongButton.addEventListener("click", function () {
+  songCanvas.toBlob(function (blob) {
+    if (!blob) {
+      alert("The card could not be created. Please try again.");
+      return;
+    }
 
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
 
-      link.href = url;
-      link.download = "han-day-song-card.png";
+    link.href = url;
+    link.download = "han-day-song-card.png";
+    link.target = "_blank";
+    link.rel = "noopener";
 
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-      setTimeout(function () {
-        URL.revokeObjectURL(url);
-      }, 1000);
-
-    }, "image/png");
-
-  } catch (error) {
-    console.error("Could not download song card:", error);
-    alert("The card could not be downloaded. Please try again.");
-  }
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 5000);
+  }, "image/png");
 });
 
 copyHashtagsButton.addEventListener("click", async function () {
