@@ -130,7 +130,13 @@ const blockedWords = [
   "kike",
   "tranny",
   "die",
-  "dying"
+  "dying",
+  "zionist",
+  "zionismm",
+ "israel",
+  "eric nam",
+  "kanye west",
+ "chris brown"
 ];
 
 function normalizeText(text) {
@@ -160,7 +166,7 @@ function containsBlockedWord(text) {
 const canvasContext = songCanvas.getContext("2d");
 
 const hashtags = [
-  "#HAN_DAY",
+  "#HanDay2026",
   "#HappyHANDay"
 ];
 
@@ -259,7 +265,7 @@ function drawSongCard() {
   canvasContext.fillText("A birthday gift for HAN", 90, 1370);
 
   canvasContext.font = "400 24px Inter, sans-serif";
-  canvasContext.fillText("HAN DAY · HAN GLOBAL", 90, 1430);
+  canvasContext.fillText("HAN DAY · 2026", 90, 1430);
 }
 
 day1Form.addEventListener("submit", async function (event) {
