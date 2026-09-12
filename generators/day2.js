@@ -32,7 +32,7 @@ const wishCanvasContext = wishCanvas.getContext("2d");
 
 
 const wishHashtags = [
-  "#HAN_DAY",
+  "#HanDay2026",
   "#HappyHANDay"
 ];
 
@@ -186,7 +186,13 @@ const prohibitedWishWords = [
   "kike",
   "tranny",
   "die",
-  "dying"
+  "dying",
+  "zionist",
+  "zionismm",
+ "israel",
+  "eric nam",
+  "kanye west",
+ "chris brown"
 ];
 
 function normalizeText(text) {
@@ -620,7 +626,7 @@ function drawWishCard(wishMessage) {
   ctx.font = "500 27px Inter, sans-serif";
 
   ctx.fillText(
-    "#HAN_DAY  #HappyHANDay",
+    "#HanDay2026  #HappyHANDay",
     wishCanvas.width / 2,
     1415
   );
