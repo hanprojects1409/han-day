@@ -41,7 +41,7 @@ const postcardSignatureInput = document.querySelector(
 const postcardCanvasContext = postcardCanvas.getContext("2d");
 
 const postcardHashtags = [
-  "#HAN_DAY",
+  "#HanDay2026",
   "#HappyHANDay"
 ];
 
@@ -195,7 +195,16 @@ const prohibitedPostcardWords = [
   "kike",
   "tranny",
   "die",
-  "dying"
+  "dying",
+  "kill",
+  "jump",
+"dive",
+  "zionist",
+  "zionismm",
+ "israel",
+  "eric nam",
+  "kanye west",
+ "chris brown"
 ];
 
 function normalizePostcardText(text) {
@@ -574,7 +583,7 @@ drawPostcardMessage(
   ctx.font = "500 27px Inter, sans-serif";
 
   ctx.fillText(
-    "#HAN_DAY  #HappyHANDay",
+    "#HanDay2026  #HappyHANDay",
     600,
     1385
   );
